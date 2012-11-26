@@ -1,4 +1,4 @@
-package app;
+package fr.adhoc.leboncoin.app;
 import java.sql.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;

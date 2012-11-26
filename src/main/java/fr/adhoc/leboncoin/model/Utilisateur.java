@@ -1,4 +1,4 @@
-package model;
+package fr.adhoc.leboncoin.model;
 import java.util.Set;
 
 
