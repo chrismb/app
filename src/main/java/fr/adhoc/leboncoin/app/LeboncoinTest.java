@@ -23,14 +23,14 @@ public class LeboncoinTest {
 		// TODO Auto-generated method stub
 		Statement stmt;
 		ResultSet rslt = null;
-        DbUtils myDbUtils = new DbUtils();
+        myDbUtils = new DbUtils();
 		
         stmt = myDbUtils.getStatement();//Cree un stmt pour la bd correspondant a la connexion conn
 
         
         String str="";
         Scanner user_input = new Scanner( System.in );
-       
+ /*      
 //Ajout d'une nouvelle offre
         System.out.println("Ajout d'une offre");
         //user_input = new Scanner( System.in );
@@ -76,7 +76,7 @@ public class LeboncoinTest {
         								(Produit_ID) + ")";
         stmt.execute(str);
     
-        
+*/
 //Ajout d'un nouvel utilisateur
         System.out.println("Ajout d'un utilisateur");
         //user_input = new Scanner( System.in );
@@ -100,7 +100,7 @@ public class LeboncoinTest {
         stmt.execute(str);
 
        
-        
+/*        
 //Ajout d'un nouveau produit
         System.out.println("Ajout d'un produit");
         //user_input = new Scanner( System.in );
@@ -138,7 +138,7 @@ public class LeboncoinTest {
         								Vend_ID + ")";
         stmt.execute(str);  
 
-
+*/
  
 
 
@@ -169,6 +169,7 @@ public class LeboncoinTest {
         
     	
     	System.out.println();
+/*        
 //Affichage des Offres :
         rslt = stmt.executeQuery("SELECT * FROM Offre");
     	System.out.println("ID\tmontant\tdate\t\tstatut\t\tA_ID\tP_ID");
@@ -220,7 +221,7 @@ public class LeboncoinTest {
         }
         
     	
-    	
+    */	
     	
     	
         
