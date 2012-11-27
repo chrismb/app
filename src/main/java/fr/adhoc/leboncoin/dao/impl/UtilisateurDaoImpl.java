@@ -1,10 +1,18 @@
 package fr.adhoc.leboncoin.dao.impl;
 
 import java.sql.*;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import fr.adhoc.leboncoin.model.Utilisateur;
 import fr.adhoc.leboncoin.utils.DbUtils;
 import fr.adhoc.leboncoin.dao.UtilisateurDao;
+import fr.adhoc.leboncoin.model.Offre;
+import fr.adhoc.leboncoin.model.Produit;
+
+
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 	DbUtils myDbUtils;
@@ -62,6 +70,25 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 				return null;
 		}
         
+	}
+
+	public List<Utilisateur> findAll(){
+		List<Utilisateur> liste = new ArrayList<Utilisateur>();
+		try{
+			Statement stmt = myDbUtils.getStatement();
+			ResultSet rslt = stmt.executeQuery("SELECT * FROM UTILISATEUR");
+			while(rslt.next()){
+				Utilisateur ut = new Utilisateur();
+				ut.setID(rslt.getInt("U_ID"));
+				ut.setNom(rslt.getString("NOM"));
+				ut.setMail(rslt.getString("MAIL"));
+				ut.setNote(rslt.getFloat("NOTE"));
+				liste.add(ut);
+			}
+		}catch(SQLException e){
+			System.out.println(e);
+		}
+		return liste;
 	}
 
 }
