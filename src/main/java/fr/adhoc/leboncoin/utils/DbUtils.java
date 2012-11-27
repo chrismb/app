@@ -21,20 +21,8 @@ public class DbUtils {
 	}
 	
 	
-	
-	
-	public void setStatement(Statement statement) {
-		this.statement = statement;
-	}
 	public Connection getConnection() {
 		return connection;
 	}
-	public void setConnection(Connection connection) {
-		this.connection = connection;
-	}
-
-
-
-
-
+	
 }
