@@ -4,7 +4,8 @@ import java.util.Set;
 
 public class Produit {
 
-	private String P_ID;
+	private int P_ID;
+	private String nom;
 	private double prixDepart;
 	private String description;
 	private Set<Offre> listeOffres;
@@ -34,14 +35,21 @@ public class Produit {
 
 
 
-	public String getID() {
+	public int getID() {
 		return P_ID;
 	}
 
-	public void setID(String iD) {
+	public void setID(int iD) {
 		P_ID = iD;
 	}
 
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 	public double getPrixDepart() {
 		return prixDepart;
 	}

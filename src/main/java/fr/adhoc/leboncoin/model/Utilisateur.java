@@ -3,7 +3,8 @@ import java.util.Set;
 
 
 public class Utilisateur {
-	private String U_ID;
+	private int U_ID;
+	private String nom;
 	private String mail;
 	private float note;
 	private Set<Offre> listeOffres;
@@ -17,9 +18,9 @@ public class Utilisateur {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Utilisateur(String iD, String mail) {
+	public Utilisateur(String nom, String mail) {
 		super();
-		U_ID = iD;
+		this.nom = nom;
 		this.mail = mail;
 	}	
 	
@@ -28,12 +29,20 @@ public class Utilisateur {
 	//------------------------------------------------------
 
 
-	public String getID() {
+	public int getID() {
 		return U_ID;
 	}
 
-	public void setID(String iD) {
+	public void setID(int iD) {
 		U_ID = iD;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public String getMail() {
