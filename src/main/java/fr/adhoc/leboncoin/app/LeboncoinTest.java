@@ -7,6 +7,10 @@ import java.util.*;
 
 public class LeboncoinTest {
 
+
+    private static DbUtils myDbUtils;
+
+
 	public LeboncoinTest() {
 		// TODO Auto-generated constructor stub
 	}
@@ -22,45 +26,14 @@ public class LeboncoinTest {
         DbUtils myDbUtils = new DbUtils();
 		
         stmt = myDbUtils.getStatement();//Cree un stmt pour la bd correspondant a la connexion conn
-/*        
-        stmt.execute("Drop table Ut");
-        
-        String str = "CREATE TABLE Ut(U_ID int,nom varchar(255),PRIMARY KEY(U_ID))";
-        stmt.execute(str);
-        
-        str = "INSERT INTO Ut VALUES (1,'Ivan'),(2,'Qing')";
-        stmt.execute(str);
-*/
-/*        
-//Obtenir la description de tous les produits dont le prix de depart est 10.
-        rslt = stmt.executeQuery("SELECT * FROM Produit WHERE prixDepart=10");
-        //rslt.beforeFirst();
-        while  (rslt.next()){
-        System.out.println("La description de "+rslt.getString("nom")+" est : "+rslt.getString("description"));
-        }
-        
-//Obtenir le nom et la description de tous les objets vendus par Nada (en supposant qu'il n'y a qu'une seule Nada)
-       	rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE nom='Nada'");
-        int sought_ID=0;
-        while  (rslt.next()){
-        	sought_ID = rslt.getInt("U_ID");
-        }
-        rslt = stmt.executeQuery("SELECT * FROM Produit WHERE V_ID="+sought_ID);
-        rslt.beforeFirst();
-        Sstem.out.println("Nada Vend :");
-        while  (rslt.next()){
-        System.out.println(rslt.getString("nom")+" : "+rslt.getString("description"));
-        }
-        
- */       
-        
+
         
         String str="";
         Scanner user_input = new Scanner( System.in );
        
 //Ajout d'une nouvelle offre
         System.out.println("Ajout d'une offre");
-        user_input = new Scanner( System.in );
+        //user_input = new Scanner( System.in );
         
         // Fixe la date
         Date date = new Date();
@@ -106,7 +79,7 @@ public class LeboncoinTest {
         
 //Ajout d'un nouvel utilisateur
         System.out.println("Ajout d'un utilisateur");
-        user_input = new Scanner( System.in );
+        //user_input = new Scanner( System.in );
         //Fixe le nom
         System.out.print("Votre nom : ");//Pour l'instant on ne teste pas si il appartient a la BD
         String U_nom = user_input.next( );
@@ -130,7 +103,7 @@ public class LeboncoinTest {
         
 //Ajout d'un nouveau produit
         System.out.println("Ajout d'un produit");
-        user_input = new Scanner( System.in );
+        //user_input = new Scanner( System.in );
         
         //Fixe le nom
         System.out.print("Votre nom : ");//Pour l'instant on ne teste pas si il appartient a la BD
