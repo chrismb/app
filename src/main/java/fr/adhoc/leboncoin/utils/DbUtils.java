@@ -1,4 +1,4 @@
-package fr.adhoc.leboncoin.app;
+package fr.adhoc.leboncoin.utils;
 import java.sql.*;
 
 public class DbUtils {

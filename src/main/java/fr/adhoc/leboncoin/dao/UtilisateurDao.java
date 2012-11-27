@@ -1,4 +1,4 @@
-package fr.adhoc.leboncoin.app;
+package fr.adhoc.leboncoin.dao;
 
 import fr.adhoc.leboncoin.model.Utilisateur;
 

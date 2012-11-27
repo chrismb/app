@@ -3,6 +3,8 @@ import java.sql.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.utils.DbUtils;
+import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
 
 
 public class LeboncoinTest {
@@ -88,6 +90,10 @@ public class LeboncoinTest {
         System.out.print("Votre mail : ");//Pour l'instant on ne teste pas si il appartient a la BD
         String mail = user_input.next( );
 
+        UtilisateurDao myUtDao = new UtilisateurDaoImpl();
+        
+        myUtDao.create(U_nom,mail);
+/*
         // Fixe la note
         float note = (float) U_nom.charAt(0) - (float) 'A' +1;
         
@@ -99,7 +105,7 @@ public class LeboncoinTest {
         								note + ")";
         stmt.execute(str);
 
-       
+*/       
 /*        
 //Ajout d'un nouveau produit
         System.out.println("Ajout d'un produit");
