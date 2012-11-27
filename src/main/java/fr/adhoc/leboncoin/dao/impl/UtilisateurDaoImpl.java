@@ -4,7 +4,7 @@ import java.sql.*;
 
 import fr.adhoc.leboncoin.model.Utilisateur;
 import fr.adhoc.leboncoin.utils.DbUtils;
-import fr.adhoc.leboncoin.app.UtilisateurDao;
+import fr.adhoc.leboncoin.dao.UtilisateurDao;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 	DbUtils myDbUtils;

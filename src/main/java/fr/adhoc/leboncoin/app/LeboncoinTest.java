@@ -3,9 +3,9 @@ import java.sql.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.utils.DbUtils;
+import fr.adhoc.leboncoin.utils.DbUtils;
 import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
-
+import fr.adhoc.leboncoin.dao.UtilisateurDao;
 
 public class LeboncoinTest {
 
