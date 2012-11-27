@@ -22,6 +22,7 @@ public class Utilisateur {
 		super();
 		this.nom = nom;
 		this.mail = mail;
+		this.note = (float) nom.charAt(0) - (float) 'A' +1;
 	}	
 	
 	//------------------------------------------------------
