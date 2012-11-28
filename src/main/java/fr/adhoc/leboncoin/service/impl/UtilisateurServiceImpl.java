@@ -2,7 +2,6 @@ package fr.adhoc.leboncoin.service.impl;
 
 import java.sql.*;
 import java.util.List;
-
 import java.util.ArrayList;
 
 
@@ -43,6 +42,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	    }
 		
 		
+	}
+
+		public List<Utilisateur> findAllUtilisateurs(){
+		return myDao.findAll();
 	}
 
 

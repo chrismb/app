@@ -9,6 +9,8 @@ import fr.adhoc.leboncoin.dao.ProduitDao;
 import fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl;
 import fr.adhoc.leboncoin.service.ProduitService;
 import fr.adhoc.leboncoin.model.Utilisateur;
+import java.util.List;
+import java.util.ArrayList;
 
 
 
@@ -37,6 +39,8 @@ public class ProduitServiceImpl implements ProduitService {
 		
 	}
 
-
+	public List<Produit> findAllProduits(){
+		return myDao.findAll();
+	}
 
 }
