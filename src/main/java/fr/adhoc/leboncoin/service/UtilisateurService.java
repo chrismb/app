@@ -1,11 +1,9 @@
-package fr.adhoc.leboncoin.dao;
+package fr.adhoc.leboncoin.service;
 
 import java.util.List;
 
 import fr.adhoc.leboncoin.model.Utilisateur;
 
 public interface UtilisateurDao {
-	Utilisateur create(Utilisateur utilisateur);
-	Utilisateur findById(int U_ID);
-	List<Utilisateur> findAll();
+	Utilisateur createUtilisateur(String nom, String mail);
 }
