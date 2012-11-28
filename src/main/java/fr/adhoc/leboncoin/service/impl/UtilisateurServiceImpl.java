@@ -8,17 +8,17 @@ import java.util.ArrayList;
 
 import fr.adhoc.leboncoin.model.Utilisateur;
 import fr.adhoc.leboncoin.dao.UtilisateurDao;
-import fr.adhoc.leboncoin.dao.UtilisateurDao;
+import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
 import fr.adhoc.leboncoin.service.UtilisateurService;
 
 
 
 
-public class UtilisateurDaoImpl implements UtilisateurDao {
+public class UtilisateurServiceImpl implements UtilisateurService {
 	private UtilisateurDao myDao;
 	
 	
-	public UtilisateurDaoImpl() throws SQLException, Exception {
+	public UtilisateurServiceImpl() throws SQLException, Exception {
 		 this.myDao = new UtilisateurDaoImpl();
 		// TODO Auto-generated constructor stub
 	}

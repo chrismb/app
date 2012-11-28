@@ -4,6 +4,6 @@ import java.util.List;
 
 import fr.adhoc.leboncoin.model.Utilisateur;
 
-public interface UtilisateurDao {
+public interface UtilisateurService {
 	Utilisateur createUtilisateur(String nom, String mail);
 }

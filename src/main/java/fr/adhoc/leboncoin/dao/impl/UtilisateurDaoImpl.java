@@ -23,7 +23,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	}
 
 	@Override
-	public Utilisateur create(Utilisateur utilisateur){
+	public boolean create(Utilisateur utilisateur){
 		
         try{		
 		//Stockage dans la basede donnees
@@ -35,11 +35,11 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         								utilisateur.getMail() + "'," + 
         								utilisateur.getNote() + ")";
         stmt.execute(str);
-        return utilisateur;
+        return true;
         }
         catch (SQLException e) {
         	System.out.println(e);
-        	return null;
+        	return false;
         }
 		
 		
@@ -59,7 +59,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			while  (rslt.next()){
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
-				myUtilisateur.setNote( (float) rslt.getString("NOM").charAt( 0 - 'A' +1) );
+				myUtilisateur.setNote(rslt.getFloat("NOTE") );
 				
 			}
 			return myUtilisateur;
@@ -87,6 +87,30 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			System.out.println(e);	
 		}
 		return liste;
+	}
+
+		public Utilisateur findByMail(String mail) {
+	        try {	
+		//Recherche dans la basede donnees
+        Statement stmt = myDbUtils.getStatement();
+        
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL="+ mail );
+        
+        //Instantiation d'un utilisateur
+        Utilisateur myUtilisateur = new Utilisateur();
+			while  (rslt.next()){
+				myUtilisateur.setID(rslt.getInt("U_ID"));
+				myUtilisateur.setNom(rslt.getString("NOM"));
+				myUtilisateur.setMail(rslt.getString("MAIL"));
+				myUtilisateur.setNote(rslt.getFloat("NOTE"));
+				
+			}
+			return myUtilisateur;
+		} catch (SQLException e) {
+			System.out.println(e);
+				return null;
+		}
+        
 	}
 
 }

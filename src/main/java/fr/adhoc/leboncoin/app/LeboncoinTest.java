@@ -8,6 +8,9 @@ import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
 import fr.adhoc.leboncoin.dao.UtilisateurDao;
 import fr.adhoc.leboncoin.model.Utilisateur;
 
+import fr.adhoc.leboncoin.service.impl.UtilisateurServiceImpl;
+import fr.adhoc.leboncoin.service.UtilisateurService;
+
 
 public class LeboncoinTest {
 
@@ -46,16 +49,16 @@ public class LeboncoinTest {
         System.out.print("Votre mail : ");//Pour l'instant on ne teste pas si il appartient a la BD
         String mail = user_input.next( );
 
-        UtilisateurDao myUtDao = new UtilisateurDaoImpl();
-        
-        myUtDao.create(U_nom,mail);
+        //UtilisateurDao myUtDao = new UtilisateurDaoImpl();
+        UtilisateurService myUtService = new UtilisateurServiceImpl();
+        myUtService.createUtilisateur(U_nom,mail);
 
         System.out.println("Liste des Utilisateurs");
 
-        for(Utilisateur ut: myUtDao.findAll()){
+        /*for(Utilisateur ut: myUtDao.findAll()){
             System.out.println(ut.getID() + "\t" + ut.getNom());
         }
-        
+        */
     	
         myDbUtils.getConnection().close();
 	}
