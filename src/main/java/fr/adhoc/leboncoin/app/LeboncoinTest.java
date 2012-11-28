@@ -8,9 +8,16 @@ import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
 import fr.adhoc.leboncoin.dao.UtilisateurDao;
 import fr.adhoc.leboncoin.model.Utilisateur;
 
+
+import fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl;
+import fr.adhoc.leboncoin.dao.ProduitDao;
+import fr.adhoc.leboncoin.model.Produit;
+
 import fr.adhoc.leboncoin.service.impl.UtilisateurServiceImpl;
 import fr.adhoc.leboncoin.service.UtilisateurService;
 
+import fr.adhoc.leboncoin.service.impl.ProduitServiceImpl;
+import fr.adhoc.leboncoin.service.ProduitService;
 
 public class LeboncoinTest {
 
@@ -37,7 +44,7 @@ public class LeboncoinTest {
         
         String str="";
         Scanner user_input = new Scanner( System.in );
- 
+ /*
         //Ajout d'un nouvel utilisateur
         System.out.println("Ajout d'un utilisateur");
         //user_input = new Scanner( System.in );
@@ -49,16 +56,56 @@ public class LeboncoinTest {
         System.out.print("Votre mail : ");//Pour l'instant on ne teste pas si il appartient a la BD
         String mail = user_input.next( );
 
-        //UtilisateurDao myUtDao = new UtilisateurDaoImpl();
+        
         UtilisateurService myUtService = new UtilisateurServiceImpl();
         myUtService.createUtilisateur(U_nom,mail);
 
         System.out.println("Liste des Utilisateurs");
 
-        /*for(Utilisateur ut: myUtDao.findAll()){
+        for(Utilisateur ut: myUtService.findAllUtilisateurs()){
             System.out.println(ut.getID() + "\t" + ut.getNom());
         }
-        */
+*/
+
+
+        UtilisateurService myUtService = new UtilisateurServiceImpl();
+
+
+        
+        //Ajout d'un nouveau produit
+
+        System.out.println("Ajout d'un produit");
+        //user_input = new Scanner( System.in );
+        //Fixe le nom
+        System.out.print("Votre nom : ");//Pour l'instant on ne teste pas si il appartient a la BD
+        String V_nom = user_input.next( );
+        //Fixe le nom du produit
+        System.out.print("Nom du produit : ");//Pour l'instant on ne teste pas si il appartient a la BD
+        String P_nom = user_input.next( );
+        //Fixe la description
+        System.out.print("Description du produit : ");
+        user_input.nextLine( );
+        String description = user_input.nextLine( );
+        //Fixe le prix de depart
+        System.out.print("A combien ? ");
+        double prixDepart = user_input.nextDouble( );
+ 
+        //recherche l'utilisateur au nom donne en supposant qu'il n'y en a qu'un
+        ProduitService myProdService = new ProduitServiceImpl();
+        Utilisateur vendeur = myUtService.findUtilisateurByName(V_nom);
+
+        myProdService.createProduit(P_nom,prixDepart,description,vendeur);
+
+
+
+
+        
+        System.out.println("Liste des Produits");
+
+        for(Produit prod: myProdService.findAllProduits()){
+            System.out.println(prod.getID() + "\t" + prod.getNom());
+        }
+        
     	
         myDbUtils.getConnection().close();
 	}

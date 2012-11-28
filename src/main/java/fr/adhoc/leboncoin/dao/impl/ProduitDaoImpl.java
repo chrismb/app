@@ -35,7 +35,7 @@ public class ProduitDaoImpl implements ProduitDao {
         								produit.getNom() + "'," + 
         								produit.getPrixDepart() + ",'" + 
         								produit.getDescription() + "'," +
-        								produit.getVendeur() + ")";
+        								produit.getVendeur().getID() + ")";
         stmt.execute(str);
         return produit;
         }
@@ -92,7 +92,7 @@ public class ProduitDaoImpl implements ProduitDao {
 			ResultSet rslt = stmt.executeQuery("SELECT * FROM PRODUIT");
 			while(rslt.next()){
 				Produit ut = new Produit();
-				ut.setID(rslt.getInt("U_ID"));
+				ut.setID(rslt.getInt("P_ID"));
 				ut.setNom(rslt.getString("NOM"));
 				ut.setPrixDepart(rslt.getDouble("PRIXDEPART"));
 				ut.setDescription(rslt.getString("DESCRIPTION"));

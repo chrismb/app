@@ -28,7 +28,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		//Verification de l'unicite du mail
 		
 		if (myDao.findByMail(mail) != null){
-			System.out.println("Mail deja utilisé ! ");
+			System.out.println("Mail deja utilise ! ");
 			return null;
 		}else{
 			//Creation de l'objet utilisateur
@@ -48,6 +48,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return myDao.findAll();
 	}
 
-
+	public Utilisateur findUtilisateurByName(String nom){
+		return myDao.findByName(nom);
+	}
 
 }

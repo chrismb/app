@@ -94,7 +94,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		//Recherche dans la basede donnees
         Statement stmt = myDbUtils.getStatement();
         
-        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL="+ mail );
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='"+ mail +"'");
         
         //Instantiation d'un utilisateur
         Utilisateur myUtilisateur = new Utilisateur();
@@ -108,6 +108,32 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			return myUtilisateur;
 		} catch (SQLException e) {
 			System.out.println(e);
+				return null;
+		}
+        
+	}
+
+
+		public Utilisateur findByName(String nom) {
+	        try {	
+		//Recherche dans la basede donnees
+        Statement stmt = myDbUtils.getStatement();
+        
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='"+ nom +"'");
+        
+        //Instantiation d'un utilisateur
+        Utilisateur myUtilisateur = new Utilisateur();
+			while  (rslt.next()){
+				myUtilisateur.setID(rslt.getInt("U_ID"));
+				myUtilisateur.setNom(rslt.getString("NOM"));
+				myUtilisateur.setMail(rslt.getString("MAIL"));
+				myUtilisateur.setNote(rslt.getFloat("NOTE"));
+				
+			}
+			return myUtilisateur;
+		} catch (SQLException e) {
+
+			System.out.println("Utilisateur " + nom + " inconnu.");
 				return null;
 		}
         
