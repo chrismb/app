@@ -1,0 +1,12 @@
+package fr.adhoc.leboncoin.dao;
+
+import java.util.List;
+
+import fr.adhoc.leboncoin.model.Produit;
+import fr.adhoc.leboncoin.model.Utilisateur;
+
+public interface ProduitDao {
+	Produit create(Utilisateur vendeur);
+	Produit findById(int U_ID);
+	List<Produit> findAll();
+}
