@@ -44,6 +44,7 @@ public class ProduitDaoImpl implements ProduitDao {
         return myProduit;
         }
         catch (SQLException e) {
+        	System.out.println(e);
         	return null;
         }
 		
@@ -78,8 +79,11 @@ public class ProduitDaoImpl implements ProduitDao {
 			}
 			return myProduit;
 		} catch (SQLException e) {
+				System.out.println(e);
 				return null;
+
 		} catch (Exception e) {
+				System.out.println(e);
 				return null;
 		}
         
