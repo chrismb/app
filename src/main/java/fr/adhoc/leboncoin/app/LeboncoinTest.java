@@ -55,6 +55,7 @@ public class LeboncoinTest {
         for(Utilisateur ut: myUtDao.findAll()){
             System.out.println(ut.getID() + "\t" + ut.getNom());
         }
+        
     	
         myDbUtils.getConnection().close();
 	}

@@ -22,6 +22,13 @@ public class Produit {
 		super();
 		this.vendeur = vendeur;
 	}
+	public Produit(String nom, double prixDepart, String description, Utilisateur vendeur) {
+		super();
+		this.nom = nom;
+		this.prixDepart = prixDepart;
+		this.description = description;
+		this.vendeur = vendeur;
+	}
 	
 
 
