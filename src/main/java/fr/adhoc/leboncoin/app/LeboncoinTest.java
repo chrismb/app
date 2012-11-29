@@ -61,16 +61,18 @@ public class LeboncoinTest {
         
         UtilisateurService myUtService = new UtilisateurServiceImpl();
         myUtService.createUtilisateur(U_nom,mail);
-
+*/
+        UtilisateurService myUtService = new UtilisateurServiceImpl();
+        
         System.out.println("Liste des Utilisateurs");
 
         for(Utilisateur ut: myUtService.findAllUtilisateurs()){
             System.out.println(ut.getID() + "\t" + ut.getNom());
         }
-*/
 
 
-        UtilisateurService myUtService = new UtilisateurServiceImpl();
+
+
 
 /*
         
@@ -115,7 +117,7 @@ public class LeboncoinTest {
 
 
 
-
+/*
 
         //Ajout d'une nouvelle offre
 
@@ -143,6 +145,11 @@ public class LeboncoinTest {
         OffreService myOfService = new OffreServiceImpl();
         myOfService.createOffre(montant,acheteur,produit);
 
+
+
+
+*/
+        OffreService myOfService = new OffreServiceImpl();
 
 
 
