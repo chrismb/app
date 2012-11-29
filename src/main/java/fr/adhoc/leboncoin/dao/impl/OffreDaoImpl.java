@@ -50,7 +50,40 @@ public class OffreDaoImpl implements OffreDao {
         }
 	}
 
-	
+		public Offre findById(int O_ID) {
+	        try {	
+		//Recherche dans la basede donnees
+        Statement stmt = myDbUtils.getStatement();
+        
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Offre WHERE O_ID="+ O_ID );
+        
+        //Instantiation d'une offre
+        
+        //Instantiation du acheteur
+
+        UtilisateurDao acht = new UtilisateurDaoImpl();
+		ProduitDao prod = new ProduitDaoImpl();
+        Offre myOffre = new Offre();
+			while  (rslt.next()){
+				myOffre.setID(rslt.getInt("O_ID"));
+				myOffre.setMontant(rslt.getDouble("MONTANT"));
+				myOffre.setDate(rslt.getDate("DATE"));
+				myOffre.setStatut(rslt.getString("STATUT"));
+				myOffre.setAcheteur( acht.findById( rslt.getInt("A_ID") ) );
+				myOffre.setProduit( prod.findById( rslt.getInt("P_ID") ) );
+				
+			}
+			return myOffre;
+		} catch (SQLException e) {
+				System.out.println(e);
+				return null;
+
+		} catch (Exception e) {
+				System.out.println(e);
+				return null;
+		}
+        
+	}
 
 	public List<Offre> findAll(){
 		List<Offre> liste = new ArrayList<Offre>();

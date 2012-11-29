@@ -50,9 +50,6 @@ public class ProduitDaoImpl implements ProduitDao {
 	@Override
 	public Produit findById(int P_ID) {
 	        try {	
-		
-
-
 		//Recherche dans la basede donnees
         Statement stmt = myDbUtils.getStatement();
         
