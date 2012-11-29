@@ -2,7 +2,6 @@ package fr.adhoc.leboncoin.dao.impl;
 
 import java.sql.*;
 import java.util.List;
-
 import java.util.ArrayList;
 
 
@@ -114,29 +113,30 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	}
 
 
-		public Utilisateur findByName(String nom) {
-	        try {	
+		public List<Utilisateur> findByName(String nom) {
+	    List<Utilisateur> liste = new ArrayList<Utilisateur>();
+	     try {	
 		//Recherche dans la basede donnees
         Statement stmt = myDbUtils.getStatement();
         
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='"+ nom +"'");
         
         //Instantiation d'un utilisateur
-        Utilisateur myUtilisateur = new Utilisateur();
+        
 			while  (rslt.next()){
+				Utilisateur myUtilisateur = new Utilisateur();
 				myUtilisateur.setID(rslt.getInt("U_ID"));
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
 				myUtilisateur.setNote(rslt.getFloat("NOTE"));
-				
+				liste.add(myUtilisateur);
 			}
-			return myUtilisateur;
+			return liste;
 		} catch (SQLException e) {
 
 			System.out.println("Utilisateur " + nom + " inconnu.");
 				return null;
 		}
-        
 	}
 
 }

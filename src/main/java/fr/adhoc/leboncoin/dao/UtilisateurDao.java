@@ -7,7 +7,7 @@ import fr.adhoc.leboncoin.model.Utilisateur;
 public interface UtilisateurDao {
 	boolean create(Utilisateur utilisateur);
 	Utilisateur findById(int U_ID);
-	Utilisateur findByName(String nom);
+	List<Utilisateur> findByName(String nom);
 	Utilisateur findByMail(String mail);
 	List<Utilisateur> findAll();
 }

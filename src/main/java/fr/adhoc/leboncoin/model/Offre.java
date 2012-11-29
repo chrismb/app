@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Offre {
 	
-	private String O_ID;
+	private int O_ID;
 	private double montant;
 	private Date date;
-	private enum Statut {Attente, Acceptee, Refusee};
-	private Statut statut;
+	//private enum Statut {Attente, Acceptee, Refusee};
+	private String statut;
 	private Utilisateur acheteur;
 	private Produit produit;
 	
@@ -39,13 +39,13 @@ public class Offre {
 
 
 
-	public String getID() {
+	public int getID() {
 		return O_ID;
 	}
 
 
 
-	public void setID(String iD) {
+	public void setID(int iD) {
 		O_ID = iD;
 	}
 
@@ -75,13 +75,13 @@ public class Offre {
 
 
 
-	public Statut getStatut() {
+	public String getStatut() {
 		return statut;
 	}
 
 
 
-	public void setStatut(Statut statut) {
+	public void setStatut(String statut) {
 		this.statut = statut;
 	}
 

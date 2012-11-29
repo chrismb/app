@@ -48,7 +48,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return myDao.findAll();
 	}
 
-	public Utilisateur findUtilisateurByName(String nom){
+	public List<Utilisateur> findUtilisateurByName(String nom){
 		return myDao.findByName(nom);
 	}
 

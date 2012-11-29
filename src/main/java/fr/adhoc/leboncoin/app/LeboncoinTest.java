@@ -92,7 +92,7 @@ public class LeboncoinTest {
  
         //recherche l'utilisateur au nom donne en supposant qu'il n'y en a qu'un
         ProduitService myProdService = new ProduitServiceImpl();
-        Utilisateur vendeur = myUtService.findUtilisateurByName(V_nom);
+        Utilisateur vendeur = myUtService.findUtilisateurByName(V_nom).iterator().next();
 
         myProdService.createProduit(P_nom,prixDepart,description,vendeur);
 

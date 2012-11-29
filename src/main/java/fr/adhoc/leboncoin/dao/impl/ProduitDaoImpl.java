@@ -91,15 +91,21 @@ public class ProduitDaoImpl implements ProduitDao {
 			Statement stmt = myDbUtils.getStatement();
 			ResultSet rslt = stmt.executeQuery("SELECT * FROM PRODUIT");
 			while(rslt.next()){
-				Produit ut = new Produit();
-				ut.setID(rslt.getInt("P_ID"));
-				ut.setNom(rslt.getString("NOM"));
-				ut.setPrixDepart(rslt.getDouble("PRIXDEPART"));
-				ut.setDescription(rslt.getString("DESCRIPTION"));
-				liste.add(ut);
+				Produit prod = new Produit();
+				UtilisateurDao myVendeur = new UtilisateurDaoImpl();
+				prod.setID(rslt.getInt("P_ID"));
+				prod.setNom(rslt.getString("NOM"));
+				prod.setPrixDepart(rslt.getDouble("PRIXDEPART"));
+				prod.setDescription(rslt.getString("DESCRIPTION"));
+				prod.setVendeur( myVendeur.findById( rslt.getInt("V_ID") ));
+				liste.add(prod);
 			}
 		}catch(SQLException e){
 			System.out.println(e);	
+			return null;
+		} catch (Exception e) {
+				System.out.println(e);
+				return null;
 		}
 		return liste;
 	}
