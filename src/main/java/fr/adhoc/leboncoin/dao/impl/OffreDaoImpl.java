@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.List;
 
 import java.util.ArrayList;
-
+import java.text.SimpleDateFormat;
 
 import fr.adhoc.leboncoin.model.Offre;
 import fr.adhoc.leboncoin.model.Produit;
@@ -32,11 +32,12 @@ public class OffreDaoImpl implements OffreDao {
         try{		
 		//Stockage dans la basede donnees
         Statement stmt = myDbUtils.getStatement();
-
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+        
 
         String str = "INSERT INTO Offre (MONTANT,DATE,STATUT,A_ID,P_ID) VALUES (" + 
         								offre.getMontant() + ",'" + 
-        								offre.getDate() + "','" + 
+        								ft.format(offre.getDate()) + "','" + 
         								offre.getStatut() + "'," +
         								offre.getAcheteur().getID() + "," +
         								offre.getProduit().getID() + ")";

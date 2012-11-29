@@ -1,7 +1,7 @@
 package fr.adhoc.leboncoin.model;
 import java.util.Date;
 import java.util.Date;	
-import java.text.SimpleDateFormat;
+
 
 
 public class Offre {
@@ -30,10 +30,9 @@ public class Offre {
 		this.montant = montant;
 		this.acheteur = acheteur;
 		this.produit = produit;
-		Date date = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-        ft.format(date);
-        this.date =date;
+		Date madate = new Date();
+        this.date = madate;
+        this.statut = "Attente";
 
 
 

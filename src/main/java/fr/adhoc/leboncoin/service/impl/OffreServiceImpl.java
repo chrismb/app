@@ -59,13 +59,13 @@ public class OffreServiceImpl implements OffreService {
 			}
 		//	L'acheteur est bien dans la base de données
 			 
-			if(utDao.findById(acheteur.getID()) != null){
+			if(utDao.findById(acheteur.getID()) == null){
 				busrulesOK = false;
 				System.out.println("Acheteur inconnu");
 			}
 		//	Le produit est bien dans la base de données
 			
-			if(prodDao.findById(produit.getID()) != null){
+			if(prodDao.findById(produit.getID()) == null){
 				busrulesOK = false;
 				System.out.println("Produit inconnu");
 			}
