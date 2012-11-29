@@ -38,7 +38,9 @@ public class ProduitServiceImpl implements ProduitService {
 		
 		
 	}
-
+	public List<Produit> findProduitByName(String nom){
+		return myDao.findByName(nom);
+	}
 	public List<Produit> findAllProduits(){
 		return myDao.findAll();
 	}

@@ -8,5 +8,6 @@ import fr.adhoc.leboncoin.model.Utilisateur;
 public interface ProduitDao {
 	Produit create(Produit produit);
 	Produit findById(int U_ID);
+	List<Produit> findByName(String nom);
 	List<Produit> findAll();
 }

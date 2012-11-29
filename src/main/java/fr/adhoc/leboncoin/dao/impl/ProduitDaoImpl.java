@@ -82,6 +82,39 @@ public class ProduitDaoImpl implements ProduitDao {
         
 	}
 
+
+	public List<Produit> findByName(String nom) {
+	    List<Produit> liste = new ArrayList<Produit>();
+	     try {	
+		//Recherche dans la basede donnees
+        Statement stmt = myDbUtils.getStatement();
+        
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE NOM='"+ nom +"'");
+        
+        //Instantiation d'un produit
+        
+			while  (rslt.next()){
+				Produit prod = new Produit();
+				UtilisateurDao myVendeur = new UtilisateurDaoImpl();
+				prod.setID(rslt.getInt("P_ID"));
+				prod.setNom(rslt.getString("NOM"));
+				prod.setPrixDepart(rslt.getDouble("PRIXDEPART"));
+				prod.setDescription(rslt.getString("DESCRIPTION"));
+				prod.setVendeur( myVendeur.findById( rslt.getInt("V_ID") ));
+				liste.add(prod);
+			}
+			return liste;
+		} catch (SQLException e) {
+
+			System.out.println("Produit " + nom + " inconnu.");
+				return null;
+		} catch (Exception e) {
+				System.out.println(e);
+				return null;
+		}
+	}
+
+
 	public List<Produit> findAll(){
 		List<Produit> liste = new ArrayList<Produit>();
 		try{
@@ -106,5 +139,6 @@ public class ProduitDaoImpl implements ProduitDao {
 		}
 		return liste;
 	}
+
 
 }

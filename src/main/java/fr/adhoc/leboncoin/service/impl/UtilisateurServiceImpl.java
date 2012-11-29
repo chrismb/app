@@ -39,12 +39,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	     
 	     return myUt;
 	        
-	    }
-		
-		
+	    }		
 	}
 
-		public List<Utilisateur> findAllUtilisateurs(){
+	public List<Utilisateur> findAllUtilisateurs(){
 		return myDao.findAll();
 	}
 
