@@ -51,7 +51,7 @@ public class UtilisateurDaoImplTest{
 		assertEquals("test@test.ts", mailtest);
 	}
 
-		@Test
+	@Test
 	public void findByIdTest() throws SQLException, Exception{
 		Utilisateur testut = new Utilisateur("test","test@test.ts");
 		UtilisateurDao myDao = new UtilisateurDaoImpl();
@@ -65,6 +65,19 @@ public class UtilisateurDaoImplTest{
 			IDtest = rslt.getInt("U_ID");
 		}
 		assertEquals(myDao.findById(IDtest).getMail(), testut.getMail());
+	}
+
+	@Test
+	public void findAllTest() throws SQLException, Exception{
+		UtilisateurDao myDao = new UtilisateurDaoImpl();
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
+		int nbrTest = 0;
+		while  (rslt.next()){
+			//On recupere le mail du dernier utilisateur ajoute (normalement "test@test.ts")
+			nbrTest ++;
+		}
+		assertEquals(myDao.findAll().size(), nbrTest);
 	}
 
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
