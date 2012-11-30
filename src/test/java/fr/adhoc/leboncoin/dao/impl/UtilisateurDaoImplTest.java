@@ -51,6 +51,22 @@ public class UtilisateurDaoImplTest{
 		assertEquals("test@test.ts", mailtest);
 	}
 
+		@Test
+	public void findByIdTest() throws SQLException, Exception{
+		Utilisateur testut = new Utilisateur("test","test@test.ts");
+		UtilisateurDao myDao = new UtilisateurDaoImpl();
+		myDao.create(testut);
+
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
+		int IDtest = 0;
+		while  (rslt.next()){
+			//On recupere le mail du dernier utilisateur ajoute (normalement "test@test.ts")
+			IDtest = rslt.getInt("U_ID");
+		}
+		assertEquals(myDao.findById(IDtest).getMail(), testut.getMail());
+	}
+
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
 		String str = "DELETE FROM Utilisateur WHERE U_ID>" + lastID;
