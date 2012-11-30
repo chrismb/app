@@ -10,106 +10,72 @@ import java.util.ArrayList;
 
 
 import fr.adhoc.leboncoin.model.Utilisateur;
+import fr.adhoc.leboncoin.model.Produit;
 import fr.adhoc.leboncoin.utils.DbUtils;
 import fr.adhoc.leboncoin.dao.ProduitDao;
 import fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl;
+import fr.adhoc.leboncoin.dao.UtilisateurDao;
+import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
 
 
-
+import fr.adhoc.leboncoin.service.UtilisateurService;
+import fr.adhoc.leboncoin.service.impl.UtilisateurServiceImpl;
 
 
 
 public class ProduitDaoImplTest{
 	private static DbUtils myDbUtils;
-	private static int lastID;
+	private static int lastIDUt;
+	private static int lastIDProd;
 	private static ProduitDao myDao;
+	private static Utilisateur testUt;
 	
 
 	@BeforeClass public static void runBeforeClass() throws SQLException, Exception{
 	// run for one time before all test cases
 		myDbUtils = new DbUtils();
 		myDao = new ProduitDaoImpl();
+		//ajout d'un utilisateur pour les tests
+		testUt = new Utilisateur("test","test@test.ts");
 		Statement stmt = myDbUtils.getStatement();
+
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit");
 		while  (rslt.next()){
-			lastID = rslt.getInt("P_ID");
+			lastIDProd = rslt.getInt("P_ID");
 		}
+
+		rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
+		while  (rslt.next()){
+			lastIDUt = rslt.getInt("U_ID");
+		}
+		UtilisateurDao myUtilisateurDao = new UtilisateurDaoImpl();
+		myUtilisateurDao.create(testUt);
 	}
 
-	/*
+	
 	@Test
 	public void createTest() throws SQLException, Exception{
-		Utilisateur testut = new Utilisateur("test","test@test.ts");
-		myDao.create(testut);
-
+		UtilisateurDao myUtilisateurDao = new UtilisateurDaoImpl();
+		Produit testProd = new Produit("Ptest",10 ,"This product is a test", myUtilisateurDao.findByMail(testUt.getMail()));
+		myDao.create(testProd);
 		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
-		String mailtest = "";
+
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE NOM='Ptest'");
+		String descriptionTest = "";
 		while  (rslt.next()){
-			//On recupere le mail du dernier utilisateur ajoute (normalement "test@test.ts")
-			mailtest = rslt.getString("MAIL");
+			//On recupere la description du dernier produit ajoute (normalement "This product is a test")
+			descriptionTest = rslt.getString("DESCRIPTION");
 		}
-		assertEquals("test@test.ts", mailtest);
+
+		assertEquals("This product is a test", descriptionTest);
 	}
-
-	@Test
-	public void findByIdTest() throws SQLException, Exception{
-		Utilisateur testut = new Utilisateur("test","test@test.ts");	
-		myDao.create(testut);
-
-		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
-		int IDtest = 0;
-		while  (rslt.next()){
-			//On recupere l'ID' du dernier utilisateur ajoute 
-			IDtest = rslt.getInt("U_ID");
-		}
-		assertEquals(myDao.findById(IDtest).getMail(), testut.getMail());
-	}
-
-	@Test
-	public void findAll() throws SQLException, Exception{
-		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
-		int nbrTest = 0;
-		while  (rslt.next()){
-			//On recupere le nombre d'utilisateurs
-			nbrTest ++;
-		}
-		assertEquals(myDao.findAll().size(), nbrTest);
-	}
-
-	@Test
-	public void findByName() throws SQLException, Exception{
-		Utilisateur testut1 = new Utilisateur("test","test1@test.ts");	
-		Utilisateur testut2 = new Utilisateur("test","test2@test.ts");
-		myDao.create(testut1);	
-		myDao.create(testut2);
-		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
-		int nbrTest = 0;
-		while  (rslt.next()){
-			//On recupere le nombre d'utilisateurs dont le nom est test
-			nbrTest ++;
-		}
-		assertEquals(myDao.findByName("test").size(), nbrTest);
-	}
-
-		@Test
-	public void findByMail() throws SQLException, Exception{
-		Utilisateur testut = new Utilisateur("test","test@test.ts");	
-		myDao.create(testut);	
-		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='test@test.ts'");
-		assertEquals(myDao.findByMail("test@test.ts").getMail(), testut.getMail());
-	}
-
-*/
 
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
-		String str = "DELETE FROM Produit WHERE P_ID>" + lastID;
+		String str = "DELETE FROM Produit WHERE P_ID>" + lastIDProd;
 		Statement stmt = myDbUtils.getStatement();
+        stmt.execute(str);
+        str = "DELETE FROM Utilisateur WHERE U_ID>" + lastIDUt;
         stmt.execute(str);
 		myDbUtils.getConnection().close();
 	}
