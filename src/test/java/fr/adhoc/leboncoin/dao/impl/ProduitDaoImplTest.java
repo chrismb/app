@@ -85,11 +85,11 @@ public class ProduitDaoImplTest{
 		}
 		assertEquals(myDao.findById(IDtest).getDescription(), testProd.getDescription());
 	}
-/*
+
 	@Test
 	public void findAll() throws SQLException, Exception{
 		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit");
 		int nbrTest = 0;
 		while  (rslt.next()){
 			//On recupere le nombre d'utilisateurs
@@ -100,21 +100,21 @@ public class ProduitDaoImplTest{
 
 	@Test
 	public void findByName() throws SQLException, Exception{
-		Utilisateur testut1 = new Utilisateur("test","test1@test.ts");	
-		Utilisateur testut2 = new Utilisateur("test","test2@test.ts");
-		myDao.create(testut1);	
-		myDao.create(testut2);
+		Produit testProd1 = new Produit("Ptest",10 ,"This product is a test1", testUt);	
+		Produit testProd2 = new Produit("Ptest",10 ,"This product is a test2", testUt);
+		myDao.create(testProd1);	
+		myDao.create(testProd2);
 		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE NOM='Ptest'");
 		int nbrTest = 0;
 		while  (rslt.next()){
 			//On recupere le nombre d'utilisateurs dont le nom est test
 			nbrTest ++;
 		}
-		assertEquals(myDao.findByName("test").size(), nbrTest);
+		assertEquals(myDao.findByName("Ptest").size(), nbrTest);
 	}
 
-*/
+
 
 
 
