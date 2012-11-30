@@ -22,8 +22,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	}
 
 	@Override
-	public boolean create(Utilisateur utilisateur){
-		
+	public Utilisateur create(Utilisateur utilisateur){
         try{		
 		//Stockage dans la basede donnees
         Statement stmt = myDbUtils.getStatement();
@@ -34,11 +33,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         								utilisateur.getMail() + "'," + 
         								utilisateur.getNote() + ")";
         stmt.execute(str);
-        return true;
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE nom='"+ utilisateur.getNom() + "' AND mail='" + utilisateur.getMail() + "'");
+        rslt.next();
+        	utilisateur.setID(rslt.getInt("U_ID"));
+        return utilisateur;
         }
         catch (SQLException e) {
         	System.out.println(e);
-        	return false;
+        	return null;
         }
 		
 		
