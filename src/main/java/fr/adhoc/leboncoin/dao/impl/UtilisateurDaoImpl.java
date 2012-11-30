@@ -113,6 +113,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	}
 
 
+	
+
 		public List<Utilisateur> findByName(String nom) {
 	    List<Utilisateur> liste = new ArrayList<Utilisateur>();
 	     try {	

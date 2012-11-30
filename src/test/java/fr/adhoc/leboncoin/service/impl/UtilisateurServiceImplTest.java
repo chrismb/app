@@ -54,7 +54,6 @@ public class UtilisateurServiceImplTest {
 		myService.createUtilisateur("test","test@test.ts");
 
     	assertEquals("Mail deja utilise ! \n", outContent.toString());
-	
 	    	
 	}
 
@@ -62,15 +61,33 @@ public class UtilisateurServiceImplTest {
 	public void cleanUpStreams() {
     	System.setOut(null);
 	}
-/*
-	public List<Utilisateur> findAllUtilisateurs(){
-		return myDao.findAll();
+
+	@Test
+	public void findAllUtilisateursTest() throws SQLException, Exception{
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
+		int nbrTest = 0;
+		while  (rslt.next()){
+			//On recupere le nombre d'utilisateurs
+			nbrTest ++;
+		}
+		assertEquals(myService.findAllUtilisateurs().size(), nbrTest);
 	}
 
-	public List<Utilisateur> findUtilisateurByName(String nom){
-		return myDao.findByName(nom);
+	@Test
+	public void findUtilisateurByNameTest() throws SQLException, Exception{
+		myService.createUtilisateur("test","test1@test.ts");
+		myService.createUtilisateur("test","test2@test.ts");
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
+		int nbrTest = 0;
+		while  (rslt.next()){
+			//On recupere le nombre d'utilisateurs dont le nom est test
+			nbrTest ++;
+		}
+		assertEquals(myService.findUtilisateurByName("test").size(), nbrTest);
 	}
-*/
+
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
 		String str = "DELETE FROM Utilisateur WHERE U_ID>" + lastID;

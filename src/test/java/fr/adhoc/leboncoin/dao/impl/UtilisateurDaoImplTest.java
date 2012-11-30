@@ -68,7 +68,7 @@ public class UtilisateurDaoImplTest{
 	}
 
 	@Test
-	public void findAll() throws SQLException, Exception{
+	public void findAllTest() throws SQLException, Exception{
 		Statement stmt = myDbUtils.getStatement();
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
 		int nbrTest = 0;
@@ -80,7 +80,7 @@ public class UtilisateurDaoImplTest{
 	}
 
 	@Test
-	public void findByName() throws SQLException, Exception{
+	public void findByNameTest() throws SQLException, Exception{
 		Utilisateur testut1 = new Utilisateur("test","test1@test.ts");	
 		Utilisateur testut2 = new Utilisateur("test","test2@test.ts");
 		myDao.create(testut1);	
@@ -95,13 +95,27 @@ public class UtilisateurDaoImplTest{
 		assertEquals(myDao.findByName("test").size(), nbrTest);
 	}
 
-		@Test
-	public void findByMail() throws SQLException, Exception{
+	@Test
+	public void findByMailTest() throws SQLException, Exception{
 		Utilisateur testut = new Utilisateur("test","test@test.ts");	
 		myDao.create(testut);	
 		Statement stmt = myDbUtils.getStatement();
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='test@test.ts'");
 		assertEquals(myDao.findByMail("test@test.ts").getMail(), testut.getMail());
+	}
+
+	@Test
+	public void deleteTest() throws SQLException, Exception{
+		// Add user
+		Utilisateur testut = new Utilisateur("test","test@test.ts");	
+		myDao.create(testut);
+		// Retrieve ID
+		int myID = myDao.findByMail("test@test.ts").getID();
+		// Delete it
+
+		myDao.delete(myID);
+		// Test
+		assertEquals(myDao.findById(myID), null);
 	}
 
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
