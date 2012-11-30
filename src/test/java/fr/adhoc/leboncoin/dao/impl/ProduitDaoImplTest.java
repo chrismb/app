@@ -50,13 +50,14 @@ public class ProduitDaoImplTest{
 		}
 		UtilisateurDao myUtilisateurDao = new UtilisateurDaoImpl();
 		myUtilisateurDao.create(testUt);
+		testUt = myUtilisateurDao.findByMail(testUt.getMail());
 	}
 
 	
 	@Test
 	public void createTest() throws SQLException, Exception{
-		UtilisateurDao myUtilisateurDao = new UtilisateurDaoImpl();
-		Produit testProd = new Produit("Ptest",10 ,"This product is a test", myUtilisateurDao.findByMail(testUt.getMail()));
+		
+		Produit testProd = new Produit("Ptest",10 ,"This product is a test", testUt);
 		myDao.create(testProd);
 		Statement stmt = myDbUtils.getStatement();
 
@@ -69,6 +70,54 @@ public class ProduitDaoImplTest{
 
 		assertEquals("This product is a test", descriptionTest);
 	}
+
+@Test
+	public void findByIdTest() throws SQLException, Exception{
+		Produit testProd = new Produit("Ptest",10 ,"This product is a test", testUt);	
+		myDao.create(testProd);
+
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE NOM='Ptest'");
+		int IDtest = 0;
+		while  (rslt.next()){
+			//On recupere l'ID' du dernier utilisateur ajoute 
+			IDtest = rslt.getInt("P_ID");
+		}
+		assertEquals(myDao.findById(IDtest).getDescription(), testProd.getDescription());
+	}
+/*
+	@Test
+	public void findAll() throws SQLException, Exception{
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
+		int nbrTest = 0;
+		while  (rslt.next()){
+			//On recupere le nombre d'utilisateurs
+			nbrTest ++;
+		}
+		assertEquals(myDao.findAll().size(), nbrTest);
+	}
+
+	@Test
+	public void findByName() throws SQLException, Exception{
+		Utilisateur testut1 = new Utilisateur("test","test1@test.ts");	
+		Utilisateur testut2 = new Utilisateur("test","test2@test.ts");
+		myDao.create(testut1);	
+		myDao.create(testut2);
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
+		int nbrTest = 0;
+		while  (rslt.next()){
+			//On recupere le nombre d'utilisateurs dont le nom est test
+			nbrTest ++;
+		}
+		assertEquals(myDao.findByName("test").size(), nbrTest);
+	}
+
+*/
+
+
+
 
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
