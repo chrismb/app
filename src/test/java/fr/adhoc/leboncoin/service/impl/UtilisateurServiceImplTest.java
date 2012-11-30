@@ -76,8 +76,8 @@ public class UtilisateurServiceImplTest {
 
 	@Test
 	public void findUtilisateurByNameTest() throws SQLException, Exception{
-		myService.createUtilisateur("test","test1@test.ts");
-		myService.createUtilisateur("test","test2@test.ts");
+		//myService.createUtilisateur("test","test1@test.ts");
+		//myService.createUtilisateur("test","test2@test.ts");
 		Statement stmt = myDbUtils.getStatement();
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
 		int nbrTest = 0;

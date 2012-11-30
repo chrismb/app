@@ -23,6 +23,7 @@ public class UtilisateurDaoImplTest{
 	private static DbUtils myDbUtils;
 	private static int lastID;
 	private static UtilisateurDao myDao;
+	//TODO Ajouter une liste pour garder la trace des utilisateurs ajoutes pendant les tests
 	
 
 	@BeforeClass public static void runBeforeClass() throws SQLException, Exception{
@@ -40,16 +41,17 @@ public class UtilisateurDaoImplTest{
 	@Test
 	public void createTest() throws SQLException, Exception{
 		Utilisateur testut = new Utilisateur("test","test@test.ts");
-		myDao.create(testut);
+		Utilisateur retUt = myDao.create(testut);
+		// Test si l'utilisateur a bien ete ajoute a la bd (par findbyID) et si c'est le bon (comparaison mail et nom)
+		assertEquals(
+			testut.getNom(),
+			myDao.findById(retUt.getID()).getNom()
+			);
+		assertEquals(
+			testut.getMail(),
+			myDao.findById(retUt.getID()).getMail()
+			);
 
-		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
-		String mailtest = "";
-		while  (rslt.next()){
-			//On recupere le mail du dernier utilisateur ajoute (normalement "test@test.ts")
-			mailtest = rslt.getString("MAIL");
-		}
-		assertEquals("test@test.ts", mailtest);
 	}
 
 	@Test
@@ -103,7 +105,7 @@ public class UtilisateurDaoImplTest{
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='test@test.ts'");
 		assertEquals(myDao.findByMail("test@test.ts").getMail(), testut.getMail());
 	}
-
+/*
 	@Test
 	public void deleteTest() throws SQLException, Exception{
 		// Add user
@@ -117,7 +119,7 @@ public class UtilisateurDaoImplTest{
 		// Test
 		assertEquals(myDao.findById(myID), null);
 	}
-
+*/
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
 		String str = "DELETE FROM Utilisateur WHERE U_ID>" + lastID;
