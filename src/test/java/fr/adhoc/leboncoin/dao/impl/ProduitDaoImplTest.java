@@ -115,10 +115,6 @@ public class ProduitDaoImplTest{
 	}
 
 
-
-
-
-
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
 		String str = "DELETE FROM Produit WHERE P_ID>" + lastIDProd;
