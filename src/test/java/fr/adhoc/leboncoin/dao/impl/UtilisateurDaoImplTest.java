@@ -116,8 +116,10 @@ public class UtilisateurDaoImplTest{
 		int nbrTest = 0;
 		rslt.next();
 		
-		
+
+		assertNotNull(myDao.findByNameAndMail("test","test@test.ts"));
 		assertEquals(myDao.findByNameAndMail("test","test@test.ts").getID(), rslt.getInt("U_ID"));
+		
 	}
 /*
 	@Test
