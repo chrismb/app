@@ -11,5 +11,5 @@ public interface UtilisateurDao {
 	Utilisateur findByMail(String mail);
 	List<Utilisateur> findAll();
 	Utilisateur findByNameAndMail(String nom,String mail);
-	//boolean delete(Utilisateur utilisateur);
+	boolean delete(int id);
 }

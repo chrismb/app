@@ -168,4 +168,16 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		
 	}
 
+	public boolean delete(int id){
+		try{
+			String str = "DELETE FROM Utilisateur WHERE U_ID=" + id;
+			Statement stmt = myDbUtils.getStatement();
+       		stmt.execute(str);
+        	return true;
+        } catch (SQLException e) {
+			System.out.println("Utilisateur n°" + id + " non efface.");
+				return false;
+		}
+	}
+
 }
