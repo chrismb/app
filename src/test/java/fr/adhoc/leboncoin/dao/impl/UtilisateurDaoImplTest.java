@@ -23,7 +23,7 @@ public class UtilisateurDaoImplTest{
 	private static DbUtils myDbUtils;
 	private static int lastID;
 	private static UtilisateurDao myDao;
-	
+
 	//TODO Ajouter une liste pour garder la trace des utilisateurs ajoutes pendant les tests
 	
 
@@ -122,7 +122,7 @@ public class UtilisateurDaoImplTest{
 		assertEquals(myDao.findByNameAndMail("test","test@test.ts").getID(), rslt.getInt("U_ID"));
 		
 	}
-/*
+
 	@Test
 	public void deleteTest() throws SQLException, Exception{
 		// Add user
@@ -136,7 +136,7 @@ public class UtilisateurDaoImplTest{
 		// Test
 		assertEquals(myDao.findById(myID), null);
 	}
-*/
+
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
 		String str = "DELETE FROM Utilisateur WHERE U_ID>" + lastID;

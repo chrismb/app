@@ -33,6 +33,8 @@ public class UtilisateurServiceImplTest {
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
 		while  (rslt.next()){
 			lastID = rslt.getInt("U_ID");
+		//stmt.close();
+		//rslt.close();
 		}
 	}
 
@@ -54,7 +56,8 @@ public class UtilisateurServiceImplTest {
 		myService.createUtilisateur("test","test@test.ts");
 
     	assertEquals("Mail deja utilise ! \n", outContent.toString());
-	    	
+		//stmt.close();
+		//rslt.close();	    	
 	}
 
 	@After
@@ -72,6 +75,8 @@ public class UtilisateurServiceImplTest {
 			nbrTest ++;
 		}
 		assertEquals(myService.findAllUtilisateurs().size(), nbrTest);
+		//stmt.close();
+		//rslt.close();
 	}
 
 	@Test
@@ -87,6 +92,8 @@ public class UtilisateurServiceImplTest {
 		}
 		//assertNotNull(myService.findUtilisateurByName("test"));
 		assertEquals(myService.findUtilisateurByName("test").size(), nbrTest);
+		//stmt.close();
+		//rslt.close();
 	}
 
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
@@ -94,6 +101,7 @@ public class UtilisateurServiceImplTest {
 		String str = "DELETE FROM Utilisateur WHERE U_ID>" + lastID;
 		Statement stmt = myDbUtils.getStatement();
         stmt.execute(str);
+   		//stmt.close();
 		myDbUtils.getConnection().close();
 	}
 
