@@ -100,6 +100,58 @@ public class UtilisateurServiceImplTest {
 		rslt.close();
 	}
 
+	@Test
+	public void deleteUtilisateurTest() throws SQLException, Exception{
+		// Add user
+		myService.createUtilisateur("test5","test5@test.ts");	
+		listeUtil.add(myService.findUtilisateurByNameAndMail("test5","test5@test.ts"));
+		// Retrieve Utilisateur
+		Utilisateur testut2 = myService.findUtilisateurByNameAndMail("test5","test5@test.ts");
+		// Delete it
+
+		myService.deleteUtilisateur(testut2.getID());
+		// Test
+		assertEquals(myService.findUtilisateurById(testut2.getID()), null);
+
+
+	}
+
+
+	@Test
+	public void findUtilisateurByNameAndMailTest() throws SQLException, Exception{
+		myService.createUtilisateur("test4","test@test.ts");	
+		listeUtil.add(myDao.findByNameAndMail("test4","test@test.ts"));	
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test4' AND MAIL='test@test.ts'");
+
+		
+		rslt.next();
+		
+		
+		assertNotNull(myService.findUtilisateurByNameAndMail("test4","test@test.ts"));
+		assertEquals(myService.findUtilisateurByNameAndMail("test4","test@test.ts").getID(), rslt.getInt("U_ID"));
+		rslt.close();
+		stmt.close();
+		
+	}
+
+	@Test
+	public void findUtilisateurByIdTest() throws SQLException, Exception{
+		myService.createUtilisateur("test8","test@test.ts");	
+		listeUtil.add(myService.findUtilisateurByNameAndMail("test8","test@test.ts"));
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test8'");
+		int IDtest = 0;
+		while (rslt.next()){
+			//On recupere l'ID' du dernier utilisateur ajoute 
+			IDtest = rslt.getInt("U_ID");
+		}
+		assertEquals(myService.findUtilisateurById(IDtest).getMail(), myService.findUtilisateurByNameAndMail("test8","test@test.ts").getMail());
+
+		rslt.close();
+		stmt.close();
+	}
+
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
 		for(Utilisateur ut : listeUtil) {
