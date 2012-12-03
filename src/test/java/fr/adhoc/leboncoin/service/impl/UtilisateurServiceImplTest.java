@@ -85,6 +85,7 @@ public class UtilisateurServiceImplTest {
 			//On recupere le nombre d'utilisateurs dont le nom est test
 			nbrTest ++;
 		}
+		//assertNotNull(myService.findUtilisateurByName("test"));
 		assertEquals(myService.findUtilisateurByName("test").size(), nbrTest);
 	}
 

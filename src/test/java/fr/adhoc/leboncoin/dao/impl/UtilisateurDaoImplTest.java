@@ -23,6 +23,7 @@ public class UtilisateurDaoImplTest{
 	private static DbUtils myDbUtils;
 	private static int lastID;
 	private static UtilisateurDao myDao;
+	
 	//TODO Ajouter une liste pour garder la trace des utilisateurs ajoutes pendant les tests
 	
 

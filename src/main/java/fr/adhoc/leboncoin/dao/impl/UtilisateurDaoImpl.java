@@ -144,7 +144,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	}
 
 	public Utilisateur findByNameAndMail(String nom,String mail){
-	    /* try {	
+	     try {	
 		//Recherche dans la basede donnees
         Statement stmt = myDbUtils.getStatement();
         
@@ -164,8 +164,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 			System.out.println("Utilisateur " + nom + " : " + mail + " inconnu.");
 				return null;
-		}*/
-		return null;
+		}
+		
 	}
 
 }
