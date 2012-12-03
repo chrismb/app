@@ -15,49 +15,50 @@ import fr.adhoc.leboncoin.utils.DbUtils;
 import fr.adhoc.leboncoin.service.impl.UtilisateurServiceImpl;
 import fr.adhoc.leboncoin.service.UtilisateurService;
 
+import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
+import fr.adhoc.leboncoin.dao.UtilisateurDao;
+
 
 
 
 public class UtilisateurServiceImplTest {
 	private static UtilisateurService myService;
-
+	private static UtilisateurDao myDao;
 	private static DbUtils myDbUtils;
 	private static int lastID;
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private  static List<Utilisateur> listeUtil;
 
 	@BeforeClass public static void runBeforeClass() throws SQLException, Exception{
 	// run for one time before all test cases
 		myDbUtils = new DbUtils();
 		myService = new UtilisateurServiceImpl();
-		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
-		while  (rslt.next()){
-			lastID = rslt.getInt("U_ID");
-		//stmt.close();
-		//rslt.close();
-		}
+		myDao = new UtilisateurDaoImpl();
+		listeUtil = new ArrayList<Utilisateur>();
 	}
 
 	@Test
 	public void createUtilisateurTest() throws SQLException, Exception{
 
-		myService.createUtilisateur("test","test@test.ts");
+		myService.createUtilisateur("test1","test@test.ts");
+		listeUtil.add(myDao.findByMail("test@test.ts"));
 		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
-		String mailtest = "";
-		while  (rslt.next()){
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='test@test.ts'");
+		String	mailtest = "";
+		while (rslt.next()) {
+
 			//On recupere le mail du dernier utilisateur ajoute (normalement "test@test.ts")
-			mailtest = rslt.getString("MAIL");
+
+		mailtest = rslt.getString("MAIL");
 		}
 		assertEquals("test@test.ts", mailtest);
 
 		System.setOut(new PrintStream(outContent));
 
-		myService.createUtilisateur("test","test@test.ts");
-
+		myService.createUtilisateur("test2","test@test.ts");
     	assertEquals("Mail deja utilise ! \n", outContent.toString());
-		//stmt.close();
-		//rslt.close();	    	
+		stmt.close();
+		rslt.close();	    	
 	}
 
 	@After
@@ -75,14 +76,17 @@ public class UtilisateurServiceImplTest {
 			nbrTest ++;
 		}
 		assertEquals(myService.findAllUtilisateurs().size(), nbrTest);
-		//stmt.close();
-		//rslt.close();
+		stmt.close();
+		rslt.close();
 	}
 
 	@Test
 	public void findUtilisateurByNameTest() throws SQLException, Exception{
 		//myService.createUtilisateur("test","test1@test.ts");
 		//myService.createUtilisateur("test","test2@test.ts");
+		//listeUtil.add(myDao.findByMail("test1@test.ts"));
+		//listeUtil.add(myDao.findByMail("test2@test.ts"));
+
 		Statement stmt = myDbUtils.getStatement();
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
 		int nbrTest = 0;
@@ -92,17 +96,19 @@ public class UtilisateurServiceImplTest {
 		}
 		//assertNotNull(myService.findUtilisateurByName("test"));
 		assertEquals(myService.findUtilisateurByName("test").size(), nbrTest);
-		//stmt.close();
-		//rslt.close();
+		stmt.close();
+		rslt.close();
 	}
 
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
-		String str = "DELETE FROM Utilisateur WHERE U_ID>" + lastID;
-		Statement stmt = myDbUtils.getStatement();
-        stmt.execute(str);
-   		//stmt.close();
+		for(Utilisateur ut : listeUtil) {
+			myDao.delete(ut);
+		}
+
 		myDbUtils.getConnection().close();
+
+		 
 	}
 
 }

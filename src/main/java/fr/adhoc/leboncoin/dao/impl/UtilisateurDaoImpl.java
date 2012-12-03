@@ -34,8 +34,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         								utilisateur.getNote() + ")";
         stmt.execute(str);
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE nom='"+ utilisateur.getNom() + "' AND mail='" + utilisateur.getMail() + "'");
-        rslt.next();
+        while(rslt.next()){
         	utilisateur.setID(rslt.getInt("U_ID"));
+        }
         return utilisateur;
         }
         catch (SQLException e) {
@@ -57,10 +58,11 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	        //Instantiation d'un utilisateur
 	        Utilisateur myUtilisateur = new Utilisateur();
 	        myUtilisateur.setID(U_ID);
-			rslt.next();
+			while(rslt.next()){
 					myUtilisateur.setNom(rslt.getString("NOM"));
 					myUtilisateur.setMail(rslt.getString("MAIL"));
 					myUtilisateur.setNote(rslt.getFloat("NOTE") );	
+			}
 			return myUtilisateur;
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -97,13 +99,13 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         
         //Instantiation d'un utilisateur
         Utilisateur myUtilisateur = new Utilisateur();
-			while  (rslt.next()){
+			while(rslt.next()){
 				myUtilisateur.setID(rslt.getInt("U_ID"));
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
 				myUtilisateur.setNote(rslt.getFloat("NOTE"));
-				
-			}
+			}	
+			
 			return myUtilisateur;
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -135,7 +137,6 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			}
 			return liste;
 		} catch (SQLException e) {
-
 			System.out.println("Utilisateur " + nom + " inconnu.");
 				return null;
 		}
@@ -149,17 +150,18 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='"+ nom +"' AND MAIL='" + mail +"'");
         
         //Instantiation d'un utilisateur
-        
-			rslt.next();
-				Utilisateur myUtilisateur = new Utilisateur();
+        Utilisateur myUtilisateur = new Utilisateur();
+			while  (rslt.next()){
+
+				
 				myUtilisateur.setID(rslt.getInt("U_ID"));
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
 				myUtilisateur.setNote(rslt.getFloat("NOTE"));
-			
+			}
 			return myUtilisateur;
 		} catch (SQLException e) {
-
+			System.out.println(e);
 			System.out.println("Utilisateur " + nom + " : " + mail + " inconnu.");
 				return null;
 		}

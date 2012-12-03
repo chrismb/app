@@ -23,8 +23,8 @@ public class UtilisateurDaoImplTest{
 	private static DbUtils myDbUtils;
 	private static int lastID;
 	private static UtilisateurDao myDao;
-	private  static List<String> listeNom;
-	private  static List<String> listeMail;
+	private static List<Utilisateur> listeUtil;
+
 
 	//TODO Ajouter une liste pour garder la trace des utilisateurs ajoutes pendant les tests
 	
@@ -33,22 +33,16 @@ public class UtilisateurDaoImplTest{
 	// run for one time before all test cases
 		myDbUtils = new DbUtils();
 		myDao = new UtilisateurDaoImpl();
-		listeNom = new ArrayList<String>();
-		listeMail = new ArrayList<String>();
-		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur");
-		while  (rslt.next()){
-			lastID = rslt.getInt("U_ID");
-		}
+		listeUtil = new ArrayList<Utilisateur>();
+
 	}
 
 	
 	@Test
 	public void createTest() throws SQLException, Exception{
-		Utilisateur testut = new Utilisateur("test","test@test.ts");
+		Utilisateur testut = new Utilisateur("test7","test@test.ts");
 		Utilisateur retUt = myDao.create(testut);
-		listeNom.add(testut.getNom());
-		listeMail.add(testut.getMail());
+		listeUtil.add(myDao.findByNameAndMail("test7","test@test.ts"));
 		// Test si l'utilisateur a bien ete ajoute a la bd (par findbyID) et si c'est le bon (comparaison mail et nom)
 		assertEquals(
 			testut.getNom(),
@@ -63,18 +57,20 @@ public class UtilisateurDaoImplTest{
 
 	@Test
 	public void findByIdTest() throws SQLException, Exception{
-		Utilisateur testut = new Utilisateur("test","test@test.ts");	
+		Utilisateur testut = new Utilisateur("test8","test@test.ts");	
 		myDao.create(testut);
-		listeNom.add(testut.getNom());
-		listeMail.add(testut.getMail());
+		listeUtil.add(myDao.findByNameAndMail("test8","test@test.ts"));
 		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test8'");
 		int IDtest = 0;
 		while  (rslt.next()){
 			//On recupere l'ID' du dernier utilisateur ajoute 
 			IDtest = rslt.getInt("U_ID");
 		}
 		assertEquals(myDao.findById(IDtest).getMail(), testut.getMail());
+
+		rslt.close();
+		stmt.close();
 	}
 
 	@Test
@@ -87,6 +83,8 @@ public class UtilisateurDaoImplTest{
 			nbrTest ++;
 		}
 		assertEquals(myDao.findAll().size(), nbrTest);
+		rslt.close();
+		stmt.close();
 	}
 
 	@Test
@@ -95,10 +93,8 @@ public class UtilisateurDaoImplTest{
 		Utilisateur testut2 = new Utilisateur("test","test2@test.ts");
 		myDao.create(testut1);	
 		myDao.create(testut2);
-		listeNom.add(testut1.getNom());
-		listeMail.add(testut1.getMail());
-		listeNom.add(testut2.getNom());
-		listeMail.add(testut2.getMail());
+		listeUtil.add(myDao.findByMail("test1@test.ts"));
+		listeUtil.add(myDao.findByMail("test2@test.ts"));
 		Statement stmt = myDbUtils.getStatement();
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
 		int nbrTest = 0;
@@ -107,60 +103,68 @@ public class UtilisateurDaoImplTest{
 			nbrTest ++;
 		}
 		assertEquals(myDao.findByName("test").size(), nbrTest);
+		rslt.close();
+		stmt.close();
 	}
 
 	@Test
 	public void findByMailTest() throws SQLException, Exception{
-		Utilisateur testut = new Utilisateur("test","test@test.ts");	
+		Utilisateur testut = new Utilisateur("test3","test@test.ts");	
 		myDao.create(testut);
-		listeNom.add(testut.getNom());
-		listeMail.add(testut.getMail());	
-		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='test@test.ts'");
+		listeUtil.add(myDao.findByNameAndMail("test3","test@test.ts"));	
+		//Statement stmt = myDbUtils.getStatement();
+		//ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='test@test.ts'");
 		assertEquals(myDao.findByMail("test@test.ts").getMail(), testut.getMail());
+		//rslt.close();
+		//stmt.close();
 	}
 
 
 		@Test
 	public void findByNameAndMailTest() throws SQLException, Exception{
-		Utilisateur testut = new Utilisateur("test","test@test.ts");	
+		Utilisateur testut = new Utilisateur("test4","test@test.ts");	
 		myDao.create(testut);
-		listeNom.add(testut.getNom());
-		listeMail.add(testut.getMail());	
+		listeUtil.add(myDao.findByNameAndMail("test4","test@test.ts"));	
 		Statement stmt = myDbUtils.getStatement();
-		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test' AND MAIL='test@test.ts'");
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test4' AND MAIL='test@test.ts'");
 		int nbrTest = 0;
-		rslt.next();
 		
-
+		while  (rslt.next()){
+		
+		}
 		assertNotNull(myDao.findByNameAndMail("test","test@test.ts"));
-		assertEquals(myDao.findByNameAndMail("test","test@test.ts").getID(), rslt.getInt("U_ID"));
+		assertEquals(myDao.findByNameAndMail("test4","test@test.ts").getID(), rslt.getInt("U_ID"));
+		rslt.close();
+		stmt.close();
 		
 	}
 
 	@Test
 	public void deleteTest() throws SQLException, Exception{
 		// Add user
-		Utilisateur testut = new Utilisateur("test4","test4@test.ts");	
+		Utilisateur testut = new Utilisateur("test5","test5@test.ts");	
 		myDao.create(testut);
-		listeNom.add(testut.getNom());
-		listeMail.add(testut.getMail());
+		listeUtil.add(myDao.findByMail("test@test.ts"));
 		// Retrieve Utilisateur
-		Utilisateur testut2 = myDao.findByMail("test4@test.ts");
+		Utilisateur testut2 = myDao.findByMail("test5@test.ts");
 		// Delete it
 
 		myDao.delete(testut2);
 		// Test
 		assertEquals(myDao.findById(testut2.getID()), null);
 
+
 	}
 
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
-		String str = "DELETE FROM Utilisateur WHERE U_ID>" + lastID;
-		Statement stmt = myDbUtils.getStatement();
-        stmt.execute(str);
+		for(Utilisateur ut : listeUtil) {
+			myDao.delete(ut);
+		}
+
 		myDbUtils.getConnection().close();
+
+		 
 	}
 
 }
