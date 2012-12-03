@@ -10,5 +10,6 @@ public interface UtilisateurDao {
 	List<Utilisateur> findByName(String nom);
 	Utilisateur findByMail(String mail);
 	List<Utilisateur> findAll();
+	Utilisateur findByNameAndMail(String nom,String mail);
 	//boolean delete(Utilisateur utilisateur);
 }

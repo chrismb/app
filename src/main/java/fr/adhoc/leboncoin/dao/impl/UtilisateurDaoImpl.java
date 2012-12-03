@@ -117,7 +117,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	
 
-		public List<Utilisateur> findByName(String nom) {
+	public List<Utilisateur> findByName(String nom) {
 	    List<Utilisateur> liste = new ArrayList<Utilisateur>();
 	     try {	
 		//Recherche dans la basede donnees
@@ -141,6 +141,31 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			System.out.println("Utilisateur " + nom + " inconnu.");
 				return null;
 		}
+	}
+
+	public Utilisateur findByNameAndMail(String nom,String mail){
+	    /* try {	
+		//Recherche dans la basede donnees
+        Statement stmt = myDbUtils.getStatement();
+        
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='"+ nom +"' AND MAIL='" + mail +"'");
+        
+        //Instantiation d'un utilisateur
+        
+			rslt.next();
+				Utilisateur myUtilisateur = new Utilisateur();
+				myUtilisateur.setID(rslt.getInt("U_ID"));
+				myUtilisateur.setNom(rslt.getString("NOM"));
+				myUtilisateur.setMail(rslt.getString("MAIL"));
+				myUtilisateur.setNote(rslt.getFloat("NOTE"));
+			
+			return myUtilisateur;
+		} catch (SQLException e) {
+
+			System.out.println("Utilisateur " + nom + " : " + mail + " inconnu.");
+				return null;
+		}*/
+		return null;
 	}
 
 }
