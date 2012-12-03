@@ -105,6 +105,21 @@ public class UtilisateurDaoImplTest{
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='test@test.ts'");
 		assertEquals(myDao.findByMail("test@test.ts").getMail(), testut.getMail());
 	}
+
+/*
+		@Test
+	public void findByNameAndMailTest() throws SQLException, Exception{
+		Utilisateur testut = new Utilisateur("test","test@test.ts");	
+		myDao.create(testut);	
+		Statement stmt = myDbUtils.getStatement();
+		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test' AND MAIL='test@test.ts'");
+		int nbrTest = 0;
+		while  (rslt.next()){
+			//On recupere le nombre d'utilisateurs dont le nom est test et le matil est test@test.ts
+			nbrTest ++;
+		}
+		assertEquals(myDao.findByNameAndMail("test","test@test.ts").size(), nbrTest);
+	}
 /*
 	@Test
 	public void deleteTest() throws SQLException, Exception{
