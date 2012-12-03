@@ -63,7 +63,7 @@ public class UtilisateurDaoImplTest{
 		Statement stmt = myDbUtils.getStatement();
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test8'");
 		int IDtest = 0;
-		while  (rslt.next()){
+		while (rslt.next()){
 			//On recupere l'ID' du dernier utilisateur ajoute 
 			IDtest = rslt.getInt("U_ID");
 		}
@@ -127,12 +127,12 @@ public class UtilisateurDaoImplTest{
 		listeUtil.add(myDao.findByNameAndMail("test4","test@test.ts"));	
 		Statement stmt = myDbUtils.getStatement();
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test4' AND MAIL='test@test.ts'");
-		int nbrTest = 0;
+
 		
-		while  (rslt.next()){
+		rslt.next();
 		
-		}
-		assertNotNull(myDao.findByNameAndMail("test","test@test.ts"));
+		
+		assertNotNull(myDao.findByNameAndMail("test4","test@test.ts"));
 		assertEquals(myDao.findByNameAndMail("test4","test@test.ts").getID(), rslt.getInt("U_ID"));
 		rslt.close();
 		stmt.close();
