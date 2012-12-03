@@ -51,5 +51,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	public List<Utilisateur> findUtilisateurByName(String nom){
 		return myDao.findByName(nom);
 	}
+	public Utilisateur findUtilisateurById(int id){
+
+		return myDao.findById(id);
+	}
+	public Utilisateur findUtilisateurByNameAndMail(String nom, String mail){
+		return myDao.findByNameAndMail(nom,mail);
+	}
+	public boolean deleteUtilisateur(int id){
+		Utilisateur myUt = new Utilisateur("","");
+		myUt.setID(id);
+		return myDao.delete(myUt);
+	}
 
 }
