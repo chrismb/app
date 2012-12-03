@@ -48,21 +48,19 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public Utilisateur findById(int U_ID) {
-	        try {	
-		//Recherche dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
-        
-        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE U_ID="+ U_ID );
-        
-        //Instantiation d'un utilisateur
-        Utilisateur myUtilisateur = new Utilisateur();
-        myUtilisateur.setID(U_ID);
-			while  (rslt.next()){
-				myUtilisateur.setNom(rslt.getString("NOM"));
-				myUtilisateur.setMail(rslt.getString("MAIL"));
-				myUtilisateur.setNote(rslt.getFloat("NOTE") );
-				
-			}
+	    try {	
+			//Recherche dans la basede donnees
+	        Statement stmt = myDbUtils.getStatement();
+	        
+	        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE U_ID="+ U_ID );
+	        
+	        //Instantiation d'un utilisateur
+	        Utilisateur myUtilisateur = new Utilisateur();
+	        myUtilisateur.setID(U_ID);
+			rslt.next();
+					myUtilisateur.setNom(rslt.getString("NOM"));
+					myUtilisateur.setMail(rslt.getString("MAIL"));
+					myUtilisateur.setNote(rslt.getFloat("NOTE") );	
 			return myUtilisateur;
 		} catch (SQLException e) {
 			System.out.println(e);
