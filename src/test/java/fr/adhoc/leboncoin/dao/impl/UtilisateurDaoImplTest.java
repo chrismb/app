@@ -145,13 +145,13 @@ public class UtilisateurDaoImplTest{
 		myDao.create(testut);
 		listeNom.add(testut.getNom());
 		listeMail.add(testut.getMail());
-		// Retrieve ID
-		int myID = myDao.findByMail("test4@test.ts").getID();
+		// Retrieve Utilisateur
+		Utilisateur testut2 = myDao.findByMail("test4@test.ts");
 		// Delete it
 
-		myDao.delete(myID);
+		myDao.delete(testut2);
 		// Test
-		assertEquals(myDao.findById(myID), null);
+		assertEquals(myDao.findById(testut2.getID()), null);
 
 	}
 

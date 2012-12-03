@@ -166,14 +166,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		
 	}
 
-	public boolean delete(int id){
+	public boolean delete(Utilisateur utilisateur){
 		try{
-			String str = "DELETE FROM Utilisateur WHERE U_ID=" + id;
+			String str = "DELETE FROM Utilisateur WHERE U_ID=" + utilisateur.getID();
 			Statement stmt = myDbUtils.getStatement();
        		stmt.execute(str);
         	return true;
         } catch (SQLException e) {
-			System.out.println("Utilisateur n°" + id + " non efface.");
+			System.out.println("Utilisateur n°" + utilisateur.getID() + " non efface.");
 				return false;
 		}
 	}
