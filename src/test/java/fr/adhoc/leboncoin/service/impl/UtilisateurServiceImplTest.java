@@ -82,10 +82,10 @@ public class UtilisateurServiceImplTest {
 
 	@Test
 	public void findUtilisateurByNameTest() throws SQLException, Exception{
-		//myService.createUtilisateur("test","test1@test.ts");
-		//myService.createUtilisateur("test","test2@test.ts");
-		//listeUtil.add(myDao.findByMail("test1@test.ts"));
-		//listeUtil.add(myDao.findByMail("test2@test.ts"));
+		myService.createUtilisateur("test","test1@test.ts");
+		myService.createUtilisateur("test","test2@test.ts");
+		listeUtil.add(myDao.findByMail("test1@test.ts"));
+		listeUtil.add(myDao.findByMail("test2@test.ts"));
 
 		Statement stmt = myDbUtils.getStatement();
 		ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='test'");
@@ -94,7 +94,7 @@ public class UtilisateurServiceImplTest {
 			//On recupere le nombre d'utilisateurs dont le nom est test
 			nbrTest ++;
 		}
-		//assertNotNull(myService.findUtilisateurByName("test"));
+		assertNotNull(myService.findUtilisateurByName("test"));
 		assertEquals(myService.findUtilisateurByName("test").size(), nbrTest);
 		stmt.close();
 		rslt.close();

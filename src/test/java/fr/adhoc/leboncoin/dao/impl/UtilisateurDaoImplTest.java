@@ -112,11 +112,8 @@ public class UtilisateurDaoImplTest{
 		Utilisateur testut = new Utilisateur("test3","test@test.ts");	
 		myDao.create(testut);
 		listeUtil.add(myDao.findByNameAndMail("test3","test@test.ts"));	
-		//Statement stmt = myDbUtils.getStatement();
-		//ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='test@test.ts'");
 		assertEquals(myDao.findByMail("test@test.ts").getMail(), testut.getMail());
-		//rslt.close();
-		//stmt.close();
+
 	}
 
 
