@@ -90,30 +90,37 @@ public class OffreServiceImplTest {
 
 	
 	}
-/*
+
 	@Test
 	public void findAllOffresTest() throws SQLException, Exception{
 
-		assertEquals(myService.findAllUtilisateurs().size(), myDao.findAll().size());
+		assertEquals(myOfService.findAllOffres().size(), myOfDao.findAll().size());
 	}
 
 
 	@Test
 	public void deleteOffreTest() throws SQLException, Exception{
-		// Add user
-		myService.createUtilisateur("test9","test9@test.ts");	
-		// Retrieve Utilisateur
-		Utilisateur testut2 = myService.findUtilisateurByNameAndMail("test9","test9@test.ts");
+		Utilisateur vendeur = myUtService.createUtilisateur("vendeurDeleteOffreTest","mailvendeur@DeleteOffreTest.ts");
+		listeUtilisateurs.add( vendeur );
+
+		Produit article = myPrService.createProduit("produitDeleteOffreTest",10,"description test deleteOffretest", vendeur);
+		listeProduits.add( article );
+
+		Utilisateur acheteur = myUtService.createUtilisateur("acheteurDeleteOffreTest","mailacheteur@DeleteOffreTest.ts");
+		listeUtilisateurs.add( acheteur );
+
+		Offre offre = myOfService.createOffre((double)10, acheteur, article);
+		listeOffres.add( offre );
 		// Delete it
 
-		myService.deleteUtilisateur(testut2.getID());
+		myOfService.deleteOffre(offre.getID());
 		// Test
-		assertEquals(myService.findUtilisateurById(testut2.getID()), null);
+		assertEquals(myOfService.findOffreById(offre.getID()), null);
 
 
 	}
 
-
+/*
 	@Test
 	public void findOffreByIdTest() throws SQLException, Exception{
 		myService.createUtilisateur("test8","test8@test.ts");	
