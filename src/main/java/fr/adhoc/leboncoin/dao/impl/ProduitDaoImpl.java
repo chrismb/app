@@ -140,5 +140,16 @@ public class ProduitDaoImpl implements ProduitDao {
 		return liste;
 	}
 
+	boolean delete(Produit produit){
+		try{
+			String str = "DELETE FROM Produit WHERE U_ID=" + produit.getID();
+			Statement stmt = myDbUtils.getStatement();
+       		stmt.execute(str);
+        	return true;
+        } catch (SQLException e) {
+			System.out.println("Produit n°" + utilisateur.getID() + " non efface.");
+				return false;
+		}
+	}
 
 }
