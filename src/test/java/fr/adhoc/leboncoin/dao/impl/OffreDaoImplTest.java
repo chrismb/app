@@ -27,7 +27,6 @@ import fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl;
 
 public class OffreDaoImplTest{
 	private static DbUtils myDbUtils;
-	private static int lastID;
 	private static UtilisateurDao myUtDao;
 	private static OffreDao myOfDao;
 	private static ProduitDao myPrDao;
