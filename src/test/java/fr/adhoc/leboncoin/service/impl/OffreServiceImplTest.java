@@ -72,6 +72,22 @@ public class OffreServiceImplTest {
 
 		assertEquals( myOfDao.findById( offre.getID() ).getAcheteur().getID(),
 					offre.getAcheteur().getID() );
+
+
+		//test montant negatif
+		assertEquals( myOfService.createOffre((double) -3, acheteur, article) , null);
+		//test L'acheteur ne peux pas etre le proprietaire du produit
+		assertEquals( myOfService.createOffre((double) 10, vendeur, article) , null);
+		//test L'acheteur est bien dans la base de données
+		Utilisateur utinconnu = new Utilisateur("inconnu", "inconnu@test.ts");
+		assertEquals( myOfService.createOffre((double) 10, utinconnu, article) , null);
+		// testLe produit est bien dans la base de données
+		Produit princonnu = new Produit("produitinconnu",10,"description produit inconnu",vendeur);
+		assertEquals( myOfService.createOffre((double) 10, acheteur, princonnu) , null);
+
+
+
+
 	
 	}
 /*
