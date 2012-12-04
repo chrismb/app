@@ -59,9 +59,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return myDao.findByNameAndMail(nom,mail);
 	}
 	public boolean deleteUtilisateur(int id){
-		Utilisateur myUt = new Utilisateur("","");
-		myUt.setID(id);
-		return myDao.delete(myUt);
+		return myDao.delete(new Utilisateur(id));
 	}
 
 }

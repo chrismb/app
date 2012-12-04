@@ -25,6 +25,10 @@ public class Offre {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Offre(int id) {
+		this.O_ID = id;
+	}
+
 	public Offre(double montant, Utilisateur acheteur, Produit produit) {
 		super();
 		this.montant = montant;

@@ -17,6 +17,9 @@ public class Utilisateur {
 	public Utilisateur() {
 		// TODO Auto-generated constructor stub
 	}
+	public Utilisateur(int id) {
+		this.U_ID = id;
+	}
 	
 	public Utilisateur(String nom, String mail) {
 		super();

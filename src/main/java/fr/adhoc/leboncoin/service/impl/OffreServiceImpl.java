@@ -91,9 +91,7 @@ public class OffreServiceImpl implements OffreService {
 	}
 
 	public boolean deleteOffre(int id){
-		Offre myOffre = new Offre(1,new Utilisateur(), new Produit());
-		myOffre.setID(id);
-		return myDao.delete(myOffre);
+		return myDao.delete(new Offre(id));
 	}
 
 	public Offre findOffreById(int id){
