@@ -45,7 +45,7 @@ public class ProduitServiceImpl implements ProduitService {
 		return myDao.findAll();
 	}
 		public boolean deleteProduit(int id){
-		Produit myProd = new Produit("","");
+		Produit myProd = new Produit("",0,"",new Utilisateur());
 		myProd.setID(id);
 		return myDao.delete(myProd);
 	}

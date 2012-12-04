@@ -186,6 +186,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
        		stmt.execute(str);
         	return true;
         } catch (SQLException e) {
+        	System.out.println(e);
 			System.out.println("Utilisateur n°" + utilisateur.getID() + " non efface.");
 				return false;
 		}

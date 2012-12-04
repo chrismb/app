@@ -5,7 +5,8 @@ import java.util.List;
 import fr.adhoc.leboncoin.model.Offre;
 
 public interface OffreDao {
-	boolean create(Offre offre);
+	Offre create(Offre offre);
 	Offre findById(int O_ID);
 	List<Offre> findAll();
+	boolean delete(Offre offre);
 }

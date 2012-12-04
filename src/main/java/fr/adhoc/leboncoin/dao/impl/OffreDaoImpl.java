@@ -27,7 +27,7 @@ public class OffreDaoImpl implements OffreDao {
 	}
 
 	@Override
-	public boolean create(Offre offre){
+	public Offre create(Offre offre){
 		
         try{		
 		//Stockage dans la basede donnees
@@ -43,11 +43,17 @@ public class OffreDaoImpl implements OffreDao {
         								offre.getProduit().getID() + ")";
 
         stmt.execute(str);
-        return true;
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Offre WHERE MONTANT="+ offre.getMontant() + " AND A_ID=" + offre.getAcheteur().getID() + " AND P_ID=" + offre.getProduit().getID());
+        	if (rslt.next()){
+        		offre.setID(rslt.getInt("O_ID"));
+        		return offre;
+	        }else{
+	        	return null;
+	        }
         }
         catch (SQLException e) {
         	System.out.println(e);
-        	return false;
+        	return null;
         }
 	}
 
@@ -112,6 +118,18 @@ public class OffreDaoImpl implements OffreDao {
         	return null;
         }
 		return liste;
+	}
+
+		public boolean delete(Offre offre){
+		try{
+			String str = "DELETE FROM Offre WHERE O_ID=" + offre.getID();
+			Statement stmt = myDbUtils.getStatement();
+       		stmt.execute(str);
+        	return true;
+        } catch (SQLException e) {
+			System.out.println("Offre n°" + offre.getID() + " non efface.");
+				return false;
+		}
 	}
 
 }

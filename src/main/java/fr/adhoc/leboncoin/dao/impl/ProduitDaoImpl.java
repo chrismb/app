@@ -37,7 +37,13 @@ public class ProduitDaoImpl implements ProduitDao {
         								produit.getDescription() + "'," +
         								produit.getVendeur().getID() + ")";
         stmt.execute(str);
-        return produit;
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE DESCRIPTION='"+ produit.getDescription() + "' AND V_ID=" + produit.getVendeur().getID() );
+        	if (rslt.next()){
+        		produit.setID(rslt.getInt("P_ID"));
+        		return produit;
+	        }else{
+	        	return null;
+	        }
         }
         catch (SQLException e) {
         	System.out.println(e);
@@ -140,14 +146,14 @@ public class ProduitDaoImpl implements ProduitDao {
 		return liste;
 	}
 
-	boolean delete(Produit produit){
+	public boolean delete(Produit produit){
 		try{
-			String str = "DELETE FROM Produit WHERE U_ID=" + produit.getID();
+			String str = "DELETE FROM Produit WHERE P_ID=" + produit.getID();
 			Statement stmt = myDbUtils.getStatement();
        		stmt.execute(str);
         	return true;
         } catch (SQLException e) {
-			System.out.println("Produit n°" + utilisateur.getID() + " non efface.");
+			System.out.println("Produit n°" + produit.getID() + " non efface.");
 				return false;
 		}
 	}
