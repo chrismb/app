@@ -40,8 +40,12 @@ public class ProduitDaoImpl implements ProduitDao {
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE DESCRIPTION='"+ produit.getDescription() + "' AND V_ID=" + produit.getVendeur().getID() );
         	if (rslt.next()){
         		produit.setID(rslt.getInt("P_ID"));
+        		rslt.close();
+				stmt.close();
         		return produit;
 	        }else{
+	        	rslt.close();
+				stmt.close();
 	        	return null;
 	        }
         }
@@ -76,6 +80,8 @@ public class ProduitDaoImpl implements ProduitDao {
 				myProduit.setVendeur( myVendeur.findById( rslt.getInt("V_ID") ) );
 				
 			}
+			rslt.close();
+			stmt.close();
 			return myProduit;
 		} catch (SQLException e) {
 				System.out.println(e);
@@ -109,6 +115,8 @@ public class ProduitDaoImpl implements ProduitDao {
 				prod.setVendeur( myVendeur.findById( rslt.getInt("V_ID") ));
 				liste.add(prod);
 			}
+			rslt.close();
+			stmt.close();
 			return liste;
 		} catch (SQLException e) {
 
@@ -136,6 +144,8 @@ public class ProduitDaoImpl implements ProduitDao {
 				prod.setVendeur( myVendeur.findById( rslt.getInt("V_ID") ));
 				liste.add(prod);
 			}
+			rslt.close();
+			stmt.close();
 		}catch(SQLException e){
 			System.out.println(e);	
 			return null;
@@ -151,6 +161,7 @@ public class ProduitDaoImpl implements ProduitDao {
 			String str = "DELETE FROM Produit WHERE P_ID=" + produit.getID();
 			Statement stmt = myDbUtils.getStatement();
        		stmt.execute(str);
+       		stmt.close();
         	return true;
         } catch (SQLException e) {
 			System.out.println("Produit n°" + produit.getID() + " non efface.");

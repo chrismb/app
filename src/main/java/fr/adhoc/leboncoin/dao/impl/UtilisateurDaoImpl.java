@@ -36,8 +36,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE nom='"+ utilisateur.getNom() + "' AND mail='" + utilisateur.getMail() + "'");
         	if (rslt.next()){
         		utilisateur.setID(rslt.getInt("U_ID"));
+        		rslt.close();
+				stmt.close();
         		return utilisateur;
 	        }else{
+	        	rslt.close();
+				stmt.close();
 	        	return null;
 	        }
         }
@@ -64,8 +68,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 					myUtilisateur.setNom(rslt.getString("NOM"));
 					myUtilisateur.setMail(rslt.getString("MAIL"));
 					myUtilisateur.setNote(rslt.getFloat("NOTE") );
+					rslt.close();
+					stmt.close();
 					return myUtilisateur;
 			}else{
+				rslt.close();
+				stmt.close();
         		return null;
         	}
 
@@ -110,8 +118,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
 				myUtilisateur.setNote(rslt.getFloat("NOTE"));
-						return myUtilisateur;
+				rslt.close();
+				stmt.close();
+				return myUtilisateur;
 			}else{
+				rslt.close();
+				stmt.close();
         		return null;
         	}	
 			
@@ -166,8 +178,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
 				myUtilisateur.setNote(rslt.getFloat("NOTE"));
+				rslt.close();
+				stmt.close();
 				return myUtilisateur;
 			}else{
+				rslt.close();
+				stmt.close();
         		return null;
         	}
 			
@@ -184,6 +200,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			String str = "DELETE FROM Utilisateur WHERE U_ID=" + utilisateur.getID();
 			Statement stmt = myDbUtils.getStatement();
        		stmt.execute(str);
+			stmt.close();
         	return true;
         } catch (SQLException e) {
         	System.out.println(e);

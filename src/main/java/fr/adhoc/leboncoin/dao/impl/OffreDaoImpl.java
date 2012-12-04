@@ -46,8 +46,12 @@ public class OffreDaoImpl implements OffreDao {
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Offre WHERE MONTANT="+ offre.getMontant() + " AND A_ID=" + offre.getAcheteur().getID() + " AND P_ID=" + offre.getProduit().getID());
         	if (rslt.next()){
         		offre.setID(rslt.getInt("O_ID"));
+        		rslt.close();
+				stmt.close();
         		return offre;
 	        }else{
+	        	rslt.close();
+				stmt.close();
 	        	return null;
 	        }
         }
@@ -80,6 +84,8 @@ public class OffreDaoImpl implements OffreDao {
 				myOffre.setProduit( prod.findById( rslt.getInt("P_ID") ) );
 				
 			}
+			rslt.close();
+			stmt.close();
 			return myOffre;
 		} catch (SQLException e) {
 				System.out.println(e);
@@ -110,6 +116,8 @@ public class OffreDaoImpl implements OffreDao {
 
 				liste.add(of);
 			}
+			rslt.close();
+			stmt.close();
 		}catch(SQLException e){
 			System.out.println(e);
 			return null;	
@@ -125,6 +133,7 @@ public class OffreDaoImpl implements OffreDao {
 			String str = "DELETE FROM Offre WHERE O_ID=" + offre.getID();
 			Statement stmt = myDbUtils.getStatement();
        		stmt.execute(str);
+       		stmt.close();
         	return true;
         } catch (SQLException e) {
 			System.out.println("Offre n°" + offre.getID() + " non efface.");

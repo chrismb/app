@@ -51,6 +51,8 @@ public class ProduitDaoImplTest{
 		UtilisateurDao myUtilisateurDao = new UtilisateurDaoImpl();
 		myUtilisateurDao.create(testUt);
 		testUt = myUtilisateurDao.findByMail(testUt.getMail());
+		rslt.close();
+		stmt.close();
 	}
 
 	
@@ -69,6 +71,8 @@ public class ProduitDaoImplTest{
 		}
 
 		assertEquals("This product is a test", descriptionTest);
+		rslt.close();
+		stmt.close();
 	}
 
 @Test
@@ -84,6 +88,8 @@ public class ProduitDaoImplTest{
 			IDtest = rslt.getInt("P_ID");
 		}
 		assertEquals(myDao.findById(IDtest).getDescription(), testProd.getDescription());
+		rslt.close();
+		stmt.close();
 	}
 
 	@Test
@@ -96,6 +102,8 @@ public class ProduitDaoImplTest{
 			nbrTest ++;
 		}
 		assertEquals(myDao.findAll().size(), nbrTest);
+		rslt.close();
+		stmt.close();
 	}
 
 	@Test
@@ -112,6 +120,8 @@ public class ProduitDaoImplTest{
 			nbrTest ++;
 		}
 		assertEquals(myDao.findByName("Ptest").size(), nbrTest);
+		rslt.close();
+		stmt.close();
 	}
 
 
@@ -122,6 +132,7 @@ public class ProduitDaoImplTest{
         stmt.execute(str);
         str = "DELETE FROM Utilisateur WHERE U_ID>" + lastIDUt;
         stmt.execute(str);
+        stmt.close();
 		myDbUtils.getConnection().close();
 	}
 
