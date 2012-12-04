@@ -11,5 +11,7 @@ import java.util.ArrayList;
 public interface OffreService {
 	Offre createOffre(Double montant, Utilisateur acheteur,Produit produit);
 	List<Offre> findAllOffres();
+	boolean deleteOffre(int id);
+	Offre findOffreById(int id);
 
 }

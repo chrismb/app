@@ -75,18 +75,22 @@ public class OffreDaoImpl implements OffreDao {
         UtilisateurDao acht = new UtilisateurDaoImpl();
 		ProduitDao prod = new ProduitDaoImpl();
         Offre myOffre = new Offre();
-			while  (rslt.next()){
+			if  (rslt.next()){
 				myOffre.setID(rslt.getInt("O_ID"));
 				myOffre.setMontant(rslt.getDouble("MONTANT"));
 				myOffre.setDate(rslt.getDate("DATE"));
 				myOffre.setStatut(rslt.getString("STATUT"));
 				myOffre.setAcheteur( acht.findById( rslt.getInt("A_ID") ) );
 				myOffre.setProduit( prod.findById( rslt.getInt("P_ID") ) );
-				
-			}
 			rslt.close();
 			stmt.close();
 			return myOffre;
+			}else{
+				rslt.close();
+				stmt.close();
+        		return null;
+        	}
+			
 		} catch (SQLException e) {
 				System.out.println(e);
 				return null;

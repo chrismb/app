@@ -83,15 +83,21 @@ public class OffreServiceImpl implements OffreService {
 	     else{
 	     	System.out.println("Probleme rencontre");
 	     	return null;
-	     }
-	        
-	    
-		
-		
+	     }	
 	}
 
 	public List<Offre> findAllOffres(){
 		return myDao.findAll();
+	}
+
+	public boolean deleteOffre(int id){
+		Offre myOffre = new Offre(1,new Utilisateur(), new Produit());
+		myOffre.setID(id);
+		return myDao.delete(myOffre);
+	}
+
+	public Offre findOffreById(int id){
+		return myDao.findById(id);
 	}
 
 }
