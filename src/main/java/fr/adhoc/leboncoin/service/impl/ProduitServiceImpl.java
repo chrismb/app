@@ -46,7 +46,7 @@ public class ProduitServiceImpl implements ProduitService {
 	}
 		public boolean deleteProduit(int id){
 		Produit myProd = new Produit("",0,"",new Utilisateur());
-		myProd.setID(id);
+		myProd.setId(id);
 		return myDao.delete(myProd);
 	}
 

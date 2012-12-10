@@ -51,13 +51,13 @@ public class Offre {
 
 
 
-	public int getID() {
+	public int getId() {
 		return O_ID;
 	}
 
 
 
-	public void setID(int iD) {
+	public void setId(int iD) {
 		O_ID = iD;
 	}
 

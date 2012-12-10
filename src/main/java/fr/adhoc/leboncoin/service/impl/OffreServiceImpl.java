@@ -53,19 +53,19 @@ public class OffreServiceImpl implements OffreService {
 				System.out.println("Montant invalide");
 			}
 		//	L'acheteur ne peux pas etre le proprietaire du produit
-			if(acheteur.getID() == produit.getVendeur().getID()){
+			if(acheteur.getId() == produit.getVendeur().getId()){
 				busrulesOK = false;
 				System.out.println("Proprietaire = Acheteur");
 			}
 		//	L'acheteur est bien dans la base de données
 			 
-			if(acheteur.getID() == 0 || utDao.findById(acheteur.getID()) == null){
+			if(acheteur.getId() == 0 || utDao.findById(acheteur.getId()) == null){
 				busrulesOK = false;
 				System.out.println("Acheteur inconnu");
 			}
 		//	Le produit est bien dans la base de données
 			
-			if(produit.getID() == 0 || prodDao.findById(produit.getID()) == null){
+			if(produit.getId() == 0 || prodDao.findById(produit.getId()) == null){
 				busrulesOK = false;
 				System.out.println("Produit inconnu");
 			}

@@ -35,7 +35,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         stmt.execute(str);
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE nom='"+ utilisateur.getNom() + "' AND mail='" + utilisateur.getMail() + "'");
         	if (rslt.next()){
-        		utilisateur.setID(rslt.getInt("U_ID"));
+        		utilisateur.setId(rslt.getInt("U_ID"));
         		rslt.close();
 				stmt.close();
         		return utilisateur;
@@ -63,7 +63,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	        
 	        //Instantiation d'un utilisateur
 	        Utilisateur myUtilisateur = new Utilisateur();
-	        myUtilisateur.setID(U_ID);
+	        myUtilisateur.setId(U_ID);
 			if(rslt.next()){
 					myUtilisateur.setNom(rslt.getString("NOM"));
 					myUtilisateur.setMail(rslt.getString("MAIL"));
@@ -92,7 +92,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			ResultSet rslt = stmt.executeQuery("SELECT * FROM UTILISATEUR");
 			while(rslt.next()){
 				Utilisateur ut = new Utilisateur();
-				ut.setID(rslt.getInt("U_ID"));
+				ut.setId(rslt.getInt("U_ID"));
 				ut.setNom(rslt.getString("NOM"));
 				ut.setMail(rslt.getString("MAIL"));
 				ut.setNote(rslt.getFloat("NOTE"));
@@ -114,7 +114,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         //Instantiation d'un utilisateur
         Utilisateur myUtilisateur = new Utilisateur();
 			if(rslt.next()){
-				myUtilisateur.setID(rslt.getInt("U_ID"));
+				myUtilisateur.setId(rslt.getInt("U_ID"));
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
 				myUtilisateur.setNote(rslt.getFloat("NOTE"));
@@ -149,7 +149,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         
 			while  (rslt.next()){
 				Utilisateur myUtilisateur = new Utilisateur();
-				myUtilisateur.setID(rslt.getInt("U_ID"));
+				myUtilisateur.setId(rslt.getInt("U_ID"));
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
 				myUtilisateur.setNote(rslt.getFloat("NOTE"));
@@ -174,7 +174,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			if  (rslt.next()){
 
 				
-				myUtilisateur.setID(rslt.getInt("U_ID"));
+				myUtilisateur.setId(rslt.getInt("U_ID"));
 				myUtilisateur.setNom(rslt.getString("NOM"));
 				myUtilisateur.setMail(rslt.getString("MAIL"));
 				myUtilisateur.setNote(rslt.getFloat("NOTE"));
@@ -197,14 +197,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	public boolean delete(Utilisateur utilisateur){
 		try{
-			String str = "DELETE FROM Utilisateur WHERE U_ID=" + utilisateur.getID();
+			String str = "DELETE FROM Utilisateur WHERE U_ID=" + utilisateur.getId();
 			Statement stmt = myDbUtils.getStatement();
        		stmt.execute(str);
 			stmt.close();
         	return true;
         } catch (SQLException e) {
         	System.out.println(e);
-			System.out.println("Utilisateur n°" + utilisateur.getID() + " non efface.");
+			System.out.println("Utilisateur n°" + utilisateur.getId() + " non efface.");
 				return false;
 		}
 	}

@@ -42,11 +42,11 @@ public class Produit {
 
 
 
-	public int getID() {
+	public int getId() {
 		return P_ID;
 	}
 
-	public void setID(int iD) {
+	public void setId(int iD) {
 		P_ID = iD;
 	}
 

@@ -46,11 +46,11 @@ public class UtilisateurDaoImplTest{
 		// Test si l'utilisateur a bien ete ajoute a la bd (par findbyID) et si c'est le bon (comparaison mail et nom)
 		assertEquals(
 			testut.getNom(),
-			myDao.findById(retUt.getID()).getNom()
+			myDao.findById(retUt.getId()).getNom()
 			);
 		assertEquals(
 			testut.getMail(),
-			myDao.findById(retUt.getID()).getMail()
+			myDao.findById(retUt.getId()).getMail()
 			);
 
 	}
@@ -130,7 +130,7 @@ public class UtilisateurDaoImplTest{
 		
 		
 		assertNotNull(myDao.findByNameAndMail("test4","test@test.ts"));
-		assertEquals(myDao.findByNameAndMail("test4","test@test.ts").getID(), rslt.getInt("U_ID"));
+		assertEquals(myDao.findByNameAndMail("test4","test@test.ts").getId(), rslt.getInt("U_ID"));
 		rslt.close();
 		stmt.close();
 		
@@ -148,7 +148,7 @@ public class UtilisateurDaoImplTest{
 
 		myDao.delete(testut2);
 		// Test
-		assertEquals(myDao.findById(testut2.getID()), null);
+		assertEquals(myDao.findById(testut2.getId()), null);
 
 
 	}

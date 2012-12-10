@@ -73,15 +73,15 @@ public class OffreDaoImplTest{
 		// Test si l'Offre a bien ete ajoute a la bd (par findbyID) et si c'est la bonne (comparaison acheteur, produit et montant)
 		assertEquals(
 			testoffre.getMontant(),
-			myOfDao.findById(retOffre.getID()).getMontant()
+			myOfDao.findById(retOffre.getId()).getMontant()
 			,0);
 		assertEquals(
-			testoffre.getAcheteur().getID(),
-			myOfDao.findById(retOffre.getID()).getAcheteur().getID()
+			testoffre.getAcheteur().getId(),
+			myOfDao.findById(retOffre.getId()).getAcheteur().getId()
 			);
 		assertEquals(
-			testoffre.getProduit().getID(),
-			myOfDao.findById(retOffre.getID()).getProduit().getID()
+			testoffre.getProduit().getId(),
+			myOfDao.findById(retOffre.getId()).getProduit().getId()
 			);
 
 	}

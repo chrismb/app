@@ -67,7 +67,7 @@ public class LeboncoinTest {
         System.out.println("Liste des Utilisateurs");
 
         for(Utilisateur ut: myUtService.findAllUtilisateurs()){
-            System.out.println(ut.getID() + "\t" + ut.getNom());
+            System.out.println(ut.getId() + "\t" + ut.getNom());
         }
 
 
@@ -111,7 +111,7 @@ public class LeboncoinTest {
         System.out.println("Liste des Produits");
 
         for(Produit prod: myProdService.findAllProduits()){
-            System.out.println(prod.getID() + "\t" + prod.getNom());
+            System.out.println(prod.getId() + "\t" + prod.getNom());
         }
 
 
@@ -158,7 +158,7 @@ public class LeboncoinTest {
         System.out.println("Liste des Offres");
 
         for(Offre offre: myOfService.findAllOffres()){
-            System.out.println(offre.getID() + "\t" + offre.getMontant());
+            System.out.println(offre.getId() + "\t" + offre.getMontant());
         }
 
 

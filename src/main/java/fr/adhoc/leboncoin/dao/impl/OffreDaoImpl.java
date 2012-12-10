@@ -39,13 +39,13 @@ public class OffreDaoImpl implements OffreDao {
         								offre.getMontant() + ",'" + 
         								ft.format(offre.getDate()) + "','" + 
         								offre.getStatut() + "'," +
-        								offre.getAcheteur().getID() + "," +
-        								offre.getProduit().getID() + ")";
+        								offre.getAcheteur().getId() + "," +
+        								offre.getProduit().getId() + ")";
 
         stmt.execute(str);
-        ResultSet rslt = stmt.executeQuery("SELECT * FROM Offre WHERE MONTANT="+ offre.getMontant() + " AND A_ID=" + offre.getAcheteur().getID() + " AND P_ID=" + offre.getProduit().getID());
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Offre WHERE MONTANT="+ offre.getMontant() + " AND A_ID=" + offre.getAcheteur().getId() + " AND P_ID=" + offre.getProduit().getId());
         	if (rslt.next()){
-        		offre.setID(rslt.getInt("O_ID"));
+        		offre.setId(rslt.getInt("O_ID"));
         		rslt.close();
 				stmt.close();
         		return offre;
@@ -76,7 +76,7 @@ public class OffreDaoImpl implements OffreDao {
 		ProduitDao prod = new ProduitDaoImpl();
         Offre myOffre = new Offre();
 			if  (rslt.next()){
-				myOffre.setID(rslt.getInt("O_ID"));
+				myOffre.setId(rslt.getInt("O_ID"));
 				myOffre.setMontant(rslt.getDouble("MONTANT"));
 				myOffre.setDate(rslt.getDate("DATE"));
 				myOffre.setStatut(rslt.getString("STATUT"));
@@ -111,7 +111,7 @@ public class OffreDaoImpl implements OffreDao {
 				Offre of = new Offre();
 				UtilisateurDao acht = new UtilisateurDaoImpl();
 				ProduitDao prod = new ProduitDaoImpl();
-				of.setID(rslt.getInt("O_ID"));
+				of.setId(rslt.getInt("O_ID"));
 				of.setMontant(rslt.getDouble("MONTANT"));
 				of.setDate(rslt.getDate("DATE"));
 				of.setStatut(rslt.getString("STATUT"));
@@ -134,13 +134,13 @@ public class OffreDaoImpl implements OffreDao {
 
 		public boolean delete(Offre offre){
 		try{
-			String str = "DELETE FROM Offre WHERE O_ID=" + offre.getID();
+			String str = "DELETE FROM Offre WHERE O_ID=" + offre.getId();
 			Statement stmt = myDbUtils.getStatement();
        		stmt.execute(str);
        		stmt.close();
         	return true;
         } catch (SQLException e) {
-			System.out.println("Offre n°" + offre.getID() + " non efface.");
+			System.out.println("Offre n°" + offre.getId() + " non efface.");
 				return false;
 		}
 	}

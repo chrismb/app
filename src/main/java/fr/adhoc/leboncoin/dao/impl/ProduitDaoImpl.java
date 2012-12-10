@@ -35,11 +35,11 @@ public class ProduitDaoImpl implements ProduitDao {
         								produit.getNom() + "'," + 
         								produit.getPrixDepart() + ",'" + 
         								produit.getDescription() + "'," +
-        								produit.getVendeur().getID() + ")";
+        								produit.getVendeur().getId() + ")";
         stmt.execute(str);
-        ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE DESCRIPTION='"+ produit.getDescription() + "' AND V_ID=" + produit.getVendeur().getID() );
+        ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE DESCRIPTION='"+ produit.getDescription() + "' AND V_ID=" + produit.getVendeur().getId() );
         	if (rslt.next()){
-        		produit.setID(rslt.getInt("P_ID"));
+        		produit.setId(rslt.getInt("P_ID"));
         		rslt.close();
 				stmt.close();
         		return produit;
@@ -72,7 +72,7 @@ public class ProduitDaoImpl implements ProduitDao {
         UtilisateurDao myVendeur = new UtilisateurDaoImpl();
 
         Produit myProduit = new Produit();
-        myProduit.setID(P_ID);
+        myProduit.setId(P_ID);
 			while  (rslt.next()){
 				myProduit.setNom(rslt.getString("NOM"));
 				myProduit.setPrixDepart(rslt.getDouble("PRIXDEPART"));
@@ -108,7 +108,7 @@ public class ProduitDaoImpl implements ProduitDao {
 			while  (rslt.next()){
 				Produit prod = new Produit();
 				UtilisateurDao myVendeur = new UtilisateurDaoImpl();
-				prod.setID(rslt.getInt("P_ID"));
+				prod.setId(rslt.getInt("P_ID"));
 				prod.setNom(rslt.getString("NOM"));
 				prod.setPrixDepart(rslt.getDouble("PRIXDEPART"));
 				prod.setDescription(rslt.getString("DESCRIPTION"));
@@ -137,7 +137,7 @@ public class ProduitDaoImpl implements ProduitDao {
 			while(rslt.next()){
 				Produit prod = new Produit();
 				UtilisateurDao myVendeur = new UtilisateurDaoImpl();
-				prod.setID(rslt.getInt("P_ID"));
+				prod.setId(rslt.getInt("P_ID"));
 				prod.setNom(rslt.getString("NOM"));
 				prod.setPrixDepart(rslt.getDouble("PRIXDEPART"));
 				prod.setDescription(rslt.getString("DESCRIPTION"));
@@ -158,13 +158,13 @@ public class ProduitDaoImpl implements ProduitDao {
 
 	public boolean delete(Produit produit){
 		try{
-			String str = "DELETE FROM Produit WHERE P_ID=" + produit.getID();
+			String str = "DELETE FROM Produit WHERE P_ID=" + produit.getId();
 			Statement stmt = myDbUtils.getStatement();
        		stmt.execute(str);
        		stmt.close();
         	return true;
         } catch (SQLException e) {
-			System.out.println("Produit n°" + produit.getID() + " non efface.");
+			System.out.println("Produit n°" + produit.getId() + " non efface.");
 				return false;
 		}
 	}

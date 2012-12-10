@@ -33,11 +33,11 @@ public class Utilisateur {
 	//------------------------------------------------------
 
 
-	public int getID() {
+	public int getId() {
 		return U_ID;
 	}
 
-	public void setID(int iD) {
+	public void setId(int iD) {
 		U_ID = iD;
 	}
 

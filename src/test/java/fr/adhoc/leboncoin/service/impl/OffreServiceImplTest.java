@@ -70,8 +70,8 @@ public class OffreServiceImplTest {
 		Offre offre = myOfService.createOffre((double)10, acheteur, article);
 		listeOffres.add( offre );
 
-		assertEquals( myOfDao.findById( offre.getID() ).getAcheteur().getID(),
-					offre.getAcheteur().getID() );
+		assertEquals( myOfDao.findById( offre.getId() ).getAcheteur().getId(),
+					offre.getAcheteur().getId() );
 
 
 		//test montant negatif
@@ -113,9 +113,9 @@ public class OffreServiceImplTest {
 		listeOffres.add( offre );
 		// Delete it
 
-		myOfService.deleteOffre(offre.getID());
+		myOfService.deleteOffre(offre.getId());
 		// Test
-		assertEquals(myOfService.findOffreById(offre.getID()), null);
+		assertEquals(myOfService.findOffreById(offre.getId()), null);
 
 
 	}

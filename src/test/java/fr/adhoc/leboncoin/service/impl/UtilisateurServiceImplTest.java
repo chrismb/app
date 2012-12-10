@@ -80,9 +80,9 @@ public class UtilisateurServiceImplTest {
 		Utilisateur testut2 = myService.findUtilisateurByNameAndMail("test9","test9@test.ts");
 		// Delete it
 
-		myService.deleteUtilisateur(testut2.getID());
+		myService.deleteUtilisateur(testut2.getId());
 		// Test
-		assertEquals(myService.findUtilisateurById(testut2.getID()), null);
+		assertEquals(myService.findUtilisateurById(testut2.getId()), null);
 
 
 	}
@@ -92,7 +92,7 @@ public class UtilisateurServiceImplTest {
 	public void findUtilisateurByNameAndMailTest() throws SQLException, Exception{
 		myService.createUtilisateur("test7","test7@test.ts");	
 		listeUtil.add(myDao.findByNameAndMail("test7","test7@test.ts"));	
-		assertEquals(myService.findUtilisateurByNameAndMail("test7","test7@test.ts").getID(), myDao.findByNameAndMail("test7","test7@test.ts").getID());
+		assertEquals(myService.findUtilisateurByNameAndMail("test7","test7@test.ts").getId(), myDao.findByNameAndMail("test7","test7@test.ts").getId());
 		
 	}
 
@@ -100,7 +100,7 @@ public class UtilisateurServiceImplTest {
 	public void findUtilisateurByIdTest() throws SQLException, Exception{
 		myService.createUtilisateur("test8","test8@test.ts");	
 		listeUtil.add(myService.findUtilisateurByNameAndMail("test8","test8@test.ts"));
-		int IDtest = myService.findUtilisateurByNameAndMail("test8","test8@test.ts").getID();
+		int IDtest = myService.findUtilisateurByNameAndMail("test8","test8@test.ts").getId();
 		assertEquals(myService.findUtilisateurById(IDtest).getMail(), myDao.findById(IDtest).getMail());
 
 	}
