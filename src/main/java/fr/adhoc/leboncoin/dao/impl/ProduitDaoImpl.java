@@ -10,6 +10,7 @@ import fr.adhoc.leboncoin.model.Utilisateur;
 import fr.adhoc.leboncoin.utils.DbUtils;
 import fr.adhoc.leboncoin.dao.UtilisateurDao;
 import fr.adhoc.leboncoin.dao.ProduitDao;
+import fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl;
 import fr.adhoc.leboncoin.model.Produit;
 
 
@@ -167,6 +168,25 @@ public class ProduitDaoImpl implements ProduitDao {
 			System.out.println("Produit n°" + produit.getId() + " non efface.");
 				return false;
 		}
+	}
+
+	public List<Produit> findByUtilisateur(Utilisateur utilisateur){
+		List<Produit> listeproduits = new ArrayList<Produit>();
+		ProduitDao myDao = null;
+		try{
+		 myDao = new ProduitDaoImpl();
+		}
+		catch (Exception e) {
+        	System.out.println(e);
+        	return null;
+        }
+   		for(Produit prod : myDao.findAll() ){
+
+	        if( prod.getVendeur().getId() == utilisateur.getId() ){
+	            listeproduits.add(prod);
+	        }
+    	}
+    	return listeproduits;
 	}
 
 }

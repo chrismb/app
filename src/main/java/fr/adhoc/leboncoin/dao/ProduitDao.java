@@ -11,4 +11,6 @@ public interface ProduitDao {
 	List<Produit> findByName(String nom);
 	List<Produit> findAll();
 	boolean delete(Produit produit);
+	List<Produit> findByUtilisateur(Utilisateur utilisateur);
+
 }

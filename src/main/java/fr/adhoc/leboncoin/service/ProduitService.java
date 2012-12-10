@@ -12,4 +12,6 @@ public interface ProduitService {
 	List<Produit> findAllProduits();
 	List<Produit> findProduitByName(String nom);
 	boolean deleteProduit(int id);
+	List<Produit> findProduitsByUtilisateur(int idutilisateur);
+
 }
