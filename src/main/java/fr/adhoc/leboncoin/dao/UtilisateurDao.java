@@ -3,6 +3,7 @@ package fr.adhoc.leboncoin.dao;
 import java.util.List;
 
 import fr.adhoc.leboncoin.model.Utilisateur;
+import fr.adhoc.leboncoin.utils.DbUtils;
 
 public interface UtilisateurDao {
 	Utilisateur create(Utilisateur utilisateur);
@@ -12,4 +13,5 @@ public interface UtilisateurDao {
 	List<Utilisateur> findAll();
 	Utilisateur findByNameAndMail(String nom,String mail);
 	boolean delete(Utilisateur utilisateur);
+	void setMyDbUtils(DbUtils dbUtils);
 }

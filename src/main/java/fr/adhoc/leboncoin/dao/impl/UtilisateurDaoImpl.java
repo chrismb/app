@@ -17,7 +17,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	
 	
 	public UtilisateurDaoImpl() throws SQLException, Exception {
-		 this.myDbUtils = new DbUtils();
+		 
 		// TODO Auto-generated constructor stub
 	}
 
@@ -207,6 +207,10 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			System.out.println("Utilisateur n°" + utilisateur.getId() + " non efface.");
 				return false;
 		}
+	}
+
+	public void setMyDbUtils(DbUtils dbUtils){
+			this.myDbUtils = dbUtils;
 	}
 
 }
