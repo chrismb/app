@@ -4,7 +4,6 @@
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
  
 	<bean id="dbUtils" class="fr.adhoc.leboncoin.utils.DbUtils"/>
-	</bean>
 	<bean id="utilisateurDAO" class="fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl">
     	<property name="myDbUtils" ref="dbUtils" />
 	</bean>
