@@ -116,8 +116,8 @@ public class LeboncoinTest {
 
 
 */
-
-        ProduitService myProdService = new ProduitServiceImpl();
+/*
+        ProduitService myProdService = (ProduitService)context.getBean("produitService");
 
 
 
@@ -162,8 +162,8 @@ public class LeboncoinTest {
 
 
 
-*/
-        OffreService myOfService = new OffreServiceImpl();
+
+        OffreService myOfService = (OffreService)context.getBean("offreService");
 
 
 
@@ -176,7 +176,7 @@ public class LeboncoinTest {
         }
 
 
-
+*/
 
 
         myDbUtils.getConnection().close();
