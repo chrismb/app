@@ -7,5 +7,11 @@
 	<bean id="utilisateurDAO" class="fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl">
     	<property name="myDbUtils" ref="dbUtils" />
 	</bean>
+	<bean id="produitDAO" class="fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl">
+    	<property name="myDbUtils" ref="dbUtils" />
+	</bean>
+	<bean id="offreDAO" class="fr.adhoc.leboncoin.dao.impl.OffreDaoImpl">
+    	<property name="myDbUtils" ref="dbUtils" />
+	</bean>
  
 </beans>

@@ -13,6 +13,8 @@ import fr.adhoc.leboncoin.model.Utilisateur;
 import fr.adhoc.leboncoin.utils.DbUtils;
 import fr.adhoc.leboncoin.dao.UtilisateurDao;
 import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 
@@ -29,13 +31,18 @@ public class UtilisateurDaoImplTest{
 	//TODO Ajouter une liste pour garder la trace des utilisateurs ajoutes pendant les tests
 	
 
-	@BeforeClass public static void runBeforeClass() throws SQLException, Exception{
-	// run for one time before all test cases
-		myDbUtils = new DbUtils();
-		myDao = new UtilisateurDaoImpl();
-		listeUtil = new ArrayList<Utilisateur>();
+	 @BeforeClass public static void runBeforeClass() throws SQLException, Exception{
+       // run for one time before all test cases
 
-	}
+               ApplicationContext context = new ClassPathXmlApplicationContext(
+                               "classpath:/applicationContext.xml");
+
+               
+               myDbUtils = (DbUtils)context.getBean("dbUtils");
+               myDao = (UtilisateurDao)context.getBean("utilisateurDAO");
+               listeUtil = new ArrayList<Utilisateur>();
+
+       }
 
 	
 	@Test

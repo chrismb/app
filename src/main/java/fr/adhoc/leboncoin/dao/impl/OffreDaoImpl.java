@@ -22,7 +22,6 @@ public class OffreDaoImpl implements OffreDao {
 	
 	
 	public OffreDaoImpl() throws SQLException, Exception {
-		 this.myDbUtils = new DbUtils();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -143,6 +142,9 @@ public class OffreDaoImpl implements OffreDao {
 			System.out.println("Offre n°" + offre.getId() + " non efface.");
 				return false;
 		}
+	}
+	public void setMyDbUtils(DbUtils dbUtils){
+			this.myDbUtils = dbUtils;
 	}
 
 }

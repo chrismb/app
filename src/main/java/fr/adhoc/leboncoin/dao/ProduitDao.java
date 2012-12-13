@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.adhoc.leboncoin.model.Produit;
 import fr.adhoc.leboncoin.model.Utilisateur;
+import fr.adhoc.leboncoin.utils.DbUtils;
 
 public interface ProduitDao {
 	Produit create(Produit produit);
@@ -12,5 +13,6 @@ public interface ProduitDao {
 	List<Produit> findAll();
 	boolean delete(Produit produit);
 	List<Produit> findByUtilisateur(Utilisateur utilisateur);
+	void setMyDbUtils(DbUtils dbUtils);
 
 }

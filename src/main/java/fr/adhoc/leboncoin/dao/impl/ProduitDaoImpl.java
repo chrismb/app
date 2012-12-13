@@ -20,7 +20,7 @@ public class ProduitDaoImpl implements ProduitDao {
 	
 	
 	public ProduitDaoImpl() throws SQLException, Exception {
-		 this.myDbUtils = new DbUtils();
+		 
 		// TODO Auto-generated constructor stub
 	}
 
@@ -188,5 +188,9 @@ public class ProduitDaoImpl implements ProduitDao {
     	}
     	return listeproduits;
 	}
+	public void setMyDbUtils(DbUtils dbUtils){
+			this.myDbUtils = dbUtils;
+	}
+
 
 }
