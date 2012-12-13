@@ -22,6 +22,9 @@ import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
 import fr.adhoc.leboncoin.dao.ProduitDao;
 import fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 
 
@@ -39,10 +42,17 @@ public class OffreDaoImplTest{
 
 	@BeforeClass public static void runBeforeClass() throws SQLException, Exception{
 	// run for one time before all test cases
-		myDbUtils = new DbUtils();
-		myUtDao = new UtilisateurDaoImpl();
-		myOfDao = new OffreDaoImpl();
-		myPrDao = new ProduitDaoImpl();
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+                               "classpath:/applicationContext.xml");
+
+               
+               myDbUtils = (DbUtils)context.getBean("dbUtils");
+               myOfDao = (OffreDao)context.getBean("offreDAO");
+               myUtDao = (UtilisateurDao)context.getBean("utilisateurDAO");
+               myPrDao = (ProduitDao)context.getBean("produitDAO");
+
+
+
 		listeOffres = new ArrayList<Offre>();
 		listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeProduits = new ArrayList<Produit>();

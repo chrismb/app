@@ -16,7 +16,8 @@ import fr.adhoc.leboncoin.dao.ProduitDao;
 import fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl;
 import fr.adhoc.leboncoin.dao.UtilisateurDao;
 import fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl;
-
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.adhoc.leboncoin.service.UtilisateurService;
 import fr.adhoc.leboncoin.service.impl.UtilisateurServiceImpl;
@@ -29,12 +30,23 @@ public class ProduitDaoImplTest{
 	private static int lastIDProd;
 	private static ProduitDao myDao;
 	private static Utilisateur testUt;
+	private static UtilisateurDao myUtilisateurDao;
 	
 
 	@BeforeClass public static void runBeforeClass() throws SQLException, Exception{
+
+
+
+ApplicationContext context = new ClassPathXmlApplicationContext(
+                               "classpath:/applicationContext.xml");
+
+               
+               myDbUtils = (DbUtils)context.getBean("dbUtils");
+               myDao = (ProduitDao)context.getBean("produitDAO");
+				myUtilisateurDao = (UtilisateurDao)context.getBean("utilisateurDAO");
+
+
 	// run for one time before all test cases
-		myDbUtils = new DbUtils();
-		myDao = new ProduitDaoImpl();
 		//ajout d'un utilisateur pour les tests
 		testUt = new Utilisateur("test","test@test.ts");
 		Statement stmt = myDbUtils.getStatement();
@@ -48,7 +60,7 @@ public class ProduitDaoImplTest{
 		while  (rslt.next()){
 			lastIDUt = rslt.getInt("U_ID");
 		}
-		UtilisateurDao myUtilisateurDao = new UtilisateurDaoImpl();
+		
 		myUtilisateurDao.create(testUt);
 		testUt = myUtilisateurDao.findByMail(testUt.getMail());
 		rslt.close();
