@@ -18,7 +18,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	
 	
 	public UtilisateurServiceImpl() throws SQLException, Exception {
-		 this.myDao = new UtilisateurDaoImpl();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -60,6 +59,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 	public boolean deleteUtilisateur(int id){
 		return myDao.delete(new Utilisateur(id));
+	}
+
+	public void setMyDao(UtilisateurDao utilisateurDao){
+			this.myDao = utilisateurDao;
 	}
 
 }

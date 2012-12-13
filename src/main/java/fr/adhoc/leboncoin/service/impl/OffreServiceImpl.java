@@ -27,9 +27,6 @@ public class OffreServiceImpl implements OffreService {
 	private ProduitDao prodDao;
 	
 	public OffreServiceImpl() throws SQLException, Exception {
-		 this.myDao = new OffreDaoImpl();
-		 this.utDao = new UtilisateurDaoImpl();
-		 this.prodDao = new ProduitDaoImpl();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -96,6 +93,17 @@ public class OffreServiceImpl implements OffreService {
 
 	public Offre findOffreById(int id){
 		return myDao.findById(id);
+	}
+
+	public void setMyDao(OffreDao offreDao){
+			this.myDao = offreDao;
+	}
+
+	public void setUtDao(UtilisateurDao utilisateurDao){
+			this.utDao = utilisateurDao;
+	}
+	public void setProdDao(ProduitDao produitDao){
+			this.prodDao = produitDao;
 	}
 
 }

@@ -23,7 +23,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class UtilisateurDaoImplTest{
 	private static DbUtils myDbUtils;
-	private static int lastID;
 	private static UtilisateurDao myDao;
 	private static List<Utilisateur> listeUtil;
 

@@ -22,7 +22,6 @@ public class ProduitServiceImpl implements ProduitService {
 	private ProduitDao myDao;
 	
 	public ProduitServiceImpl() throws SQLException, Exception {
-		 this.myDao = new ProduitDaoImpl();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -62,6 +61,10 @@ public class ProduitServiceImpl implements ProduitService {
         	return null;
         }
 		return myDao.findByUtilisateur( myUtDao.findById(idutilisateur) );
+	}
+
+	public void setMyDao(ProduitDao produitDao){
+			this.myDao = produitDao;
 	}
 
 }

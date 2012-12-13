@@ -10,5 +10,4 @@ public interface OffreDao {
 	Offre findById(int O_ID);
 	List<Offre> findAll();
 	boolean delete(Offre offre);
-	void setMyDbUtils(DbUtils dbUtils);
 }

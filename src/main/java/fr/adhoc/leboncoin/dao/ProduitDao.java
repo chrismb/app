@@ -13,6 +13,4 @@ public interface ProduitDao {
 	List<Produit> findAll();
 	boolean delete(Produit produit);
 	List<Produit> findByUtilisateur(Utilisateur utilisateur);
-	void setMyDbUtils(DbUtils dbUtils);
-
 }

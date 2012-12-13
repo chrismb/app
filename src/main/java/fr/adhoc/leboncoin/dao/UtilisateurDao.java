@@ -13,5 +13,4 @@ public interface UtilisateurDao {
 	List<Utilisateur> findAll();
 	Utilisateur findByNameAndMail(String nom,String mail);
 	boolean delete(Utilisateur utilisateur);
-	void setMyDbUtils(DbUtils dbUtils);
 }
