@@ -13,15 +13,15 @@
 	<bean id="offreDAO" class="fr.adhoc.leboncoin.dao.impl.OffreDaoImpl">
     	<property name="myDbUtils" ref="dbUtils" />
 	</bean>
-	<bean id="offreService" class="fr.adhoc.leboncoin.dao.impl.OffreServiceImpl">
+	<bean id="offreService" class="fr.adhoc.leboncoin.service.impl.OffreServiceImpl">
     	<property name="myDao" ref="offreDAO" />
     	<property name="prodDao" ref="produitDAO" />
     	<property name="utDao" ref="utilisateurDAO" />
 	</bean>
-	<bean id="produitService" class="fr.adhoc.leboncoin.dao.impl.ProduitServiceImpl">
+	<bean id="produitService" class="fr.adhoc.leboncoin.service.impl.ProduitServiceImpl">
     	<property name="myDao" ref="produitDAO" />
 	</bean>
-	<bean id="utilisateurService" class="fr.adhoc.leboncoin.dao.impl.UtilisateurServiceImpl">
+	<bean id="utilisateurService" class="fr.adhoc.leboncoin.service.impl.UtilisateurServiceImpl">
     	<property name="myDao" ref="utilisateurDAO" />
 	</bean>
  

@@ -20,6 +20,9 @@ import fr.adhoc.leboncoin.service.impl.OffreServiceImpl;
 import fr.adhoc.leboncoin.service.OffreService;
 import fr.adhoc.leboncoin.model.Offre;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 public class LeboncoinTest {
 
@@ -40,7 +43,18 @@ public class LeboncoinTest {
 		Statement stmt;
 		ResultSet rslt = null;
         myDbUtils = new DbUtils();
-		
+
+
+
+
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+                               "classpath:/applicationContext.xml");
+
+               
+               UtilisateurService myUtService = (UtilisateurService)context.getBean("utilisateurService");
+
+
+
         stmt = myDbUtils.getStatement();//Cree un stmt pour la bd correspondant a la connexion conn
 
         
@@ -62,7 +76,7 @@ public class LeboncoinTest {
         UtilisateurService myUtService = new UtilisateurServiceImpl();
         myUtService.createUtilisateur(U_nom,mail);
 */
-        UtilisateurService myUtService = new UtilisateurServiceImpl();
+
         
         System.out.println("Liste des Utilisateurs");
 
