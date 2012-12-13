@@ -42,7 +42,7 @@ public class LeboncoinTest {
 		// TODO Auto-generated method stub
 		Statement stmt;
 		ResultSet rslt = null;
-        myDbUtils = new DbUtils();
+        
 
 
 
@@ -50,7 +50,7 @@ public class LeboncoinTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
                                "classpath:/applicationContext.xml");
 
-               
+               myDbUtils = (DbUtils)context.getBean("dbUtils");
                UtilisateurService myUtService = (UtilisateurService)context.getBean("utilisateurService");
 
 
