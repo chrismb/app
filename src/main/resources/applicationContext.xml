@@ -9,6 +9,8 @@
 	</bean>
 	<bean id="produitDAO" class="fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl">
     	<property name="myDbUtils" ref="dbUtils" />
+    	<property name="myVendeur" ref="utilisateurDAO" />
+    	<property name="myDao" ref="produitDAO" />
 	</bean>
 	<bean id="offreDAO" class="fr.adhoc.leboncoin.dao.impl.OffreDaoImpl">
     	<property name="myDbUtils" ref="dbUtils" />

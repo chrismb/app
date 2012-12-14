@@ -17,7 +17,8 @@ import fr.adhoc.leboncoin.model.Produit;
 
 public class ProduitDaoImpl implements ProduitDao {
 	private DbUtils myDbUtils;
-	
+	private UtilisateurDao myVendeur;
+	private ProduitDao myDao;
 	
 	public ProduitDaoImpl() throws SQLException, Exception {
 		 
@@ -53,9 +54,7 @@ public class ProduitDaoImpl implements ProduitDao {
         catch (SQLException e) {
         	System.out.println(e);
         	return null;
-        }
-		
-		
+        }	
 	}
 
 	@Override
@@ -65,12 +64,6 @@ public class ProduitDaoImpl implements ProduitDao {
         Statement stmt = myDbUtils.getStatement();
         
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE P_ID="+ P_ID );
-        
-        //Instantiation d'un produit
-        
-        //Instantiation du vendeur
-
-        UtilisateurDao myVendeur = new UtilisateurDaoImpl();
 
         Produit myProduit = new Produit();
         myProduit.setId(P_ID);
@@ -108,7 +101,6 @@ public class ProduitDaoImpl implements ProduitDao {
         
 			while  (rslt.next()){
 				Produit prod = new Produit();
-				UtilisateurDao myVendeur = new UtilisateurDaoImpl();
 				prod.setId(rslt.getInt("P_ID"));
 				prod.setNom(rslt.getString("NOM"));
 				prod.setPrixDepart(rslt.getDouble("PRIXDEPART"));
@@ -137,7 +129,6 @@ public class ProduitDaoImpl implements ProduitDao {
 			ResultSet rslt = stmt.executeQuery("SELECT * FROM PRODUIT");
 			while(rslt.next()){
 				Produit prod = new Produit();
-				UtilisateurDao myVendeur = new UtilisateurDaoImpl();
 				prod.setId(rslt.getInt("P_ID"));
 				prod.setNom(rslt.getString("NOM"));
 				prod.setPrixDepart(rslt.getDouble("PRIXDEPART"));
@@ -172,14 +163,7 @@ public class ProduitDaoImpl implements ProduitDao {
 
 	public List<Produit> findByUtilisateur(Utilisateur utilisateur){
 		List<Produit> listeproduits = new ArrayList<Produit>();
-		ProduitDao myDao = null;
-		try{
-		 myDao = new ProduitDaoImpl();
-		}
-		catch (Exception e) {
-        	System.out.println(e);
-        	return null;
-        }
+	
    		for(Produit prod : myDao.findAll() ){
 
 	        if( prod.getVendeur().getId() == utilisateur.getId() ){
@@ -190,6 +174,12 @@ public class ProduitDaoImpl implements ProduitDao {
 	}
 	public void setMyDbUtils(DbUtils dbUtils){
 			this.myDbUtils = dbUtils;
+	}
+	public void setMyVendeur(UtilisateurDao utilisateurDAO){
+			this.myVendeur = utilisateurDAO;
+	}
+	public void setMyDao(ProduitDao produitDAO){
+			this.myDao= produitDAO;
 	}
 
 
