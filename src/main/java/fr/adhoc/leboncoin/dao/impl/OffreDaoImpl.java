@@ -18,21 +18,17 @@ import fr.adhoc.leboncoin.dao.ProduitDao;
 
 
 public class OffreDaoImpl implements OffreDao {
-	private DbUtils myDbUtils;
-	private UtilisateurDao acht;
-	private ProduitDao prod;
+	private DbUtils myOffreDbUtils;
+	private UtilisateurDao utilisateurDaoOffreDao;
+	private ProduitDao produitDaoOffreDao;
 	
-	
-	public OffreDaoImpl() throws SQLException, Exception {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public Offre create(Offre offre){
 		
         try{		
 		//Stockage dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myOffreDbUtils.getStatement();
         SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
         
 
@@ -65,7 +61,7 @@ public class OffreDaoImpl implements OffreDao {
 		public Offre findById(int O_ID) {
 	        try {	
 		//Recherche dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myOffreDbUtils.getStatement();
         
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Offre WHERE O_ID="+ O_ID );
         
@@ -80,8 +76,8 @@ public class OffreDaoImpl implements OffreDao {
 				myOffre.setMontant(rslt.getDouble("MONTANT"));
 				myOffre.setDate(rslt.getDate("DATE"));
 				myOffre.setStatut(rslt.getString("STATUT"));
-				myOffre.setAcheteur( acht.findById( rslt.getInt("A_ID") ) );
-				myOffre.setProduit( prod.findById( rslt.getInt("P_ID") ) );
+				myOffre.setAcheteur( utilisateurDaoOffreDao.findById( rslt.getInt("A_ID") ) );
+				myOffre.setProduit( produitDaoOffreDao.findById( rslt.getInt("P_ID") ) );
 			rslt.close();
 			stmt.close();
 			return myOffre;
@@ -105,7 +101,7 @@ public class OffreDaoImpl implements OffreDao {
 	public List<Offre> findAll(){
 		List<Offre> liste = new ArrayList<Offre>();
 		try{
-			Statement stmt = myDbUtils.getStatement();
+			Statement stmt = myOffreDbUtils.getStatement();
 			ResultSet rslt = stmt.executeQuery("SELECT * FROM OFFRE");
 			while(rslt.next()){
 				Offre of = new Offre();
@@ -113,8 +109,8 @@ public class OffreDaoImpl implements OffreDao {
 				of.setMontant(rslt.getDouble("MONTANT"));
 				of.setDate(rslt.getDate("DATE"));
 				of.setStatut(rslt.getString("STATUT"));
-				of.setAcheteur( acht.findById( rslt.getInt("A_ID") ) );
-				of.setProduit( prod.findById( rslt.getInt("P_ID") ) );
+				of.setAcheteur( utilisateurDaoOffreDao.findById( rslt.getInt("A_ID") ) );
+				of.setProduit( produitDaoOffreDao.findById( rslt.getInt("P_ID") ) );
 
 				liste.add(of);
 			}
@@ -133,7 +129,7 @@ public class OffreDaoImpl implements OffreDao {
 		public boolean delete(Offre offre){
 		try{
 			String str = "DELETE FROM Offre WHERE O_ID=" + offre.getId();
-			Statement stmt = myDbUtils.getStatement();
+			Statement stmt = myOffreDbUtils.getStatement();
        		stmt.execute(str);
        		stmt.close();
         	return true;
@@ -142,14 +138,14 @@ public class OffreDaoImpl implements OffreDao {
 				return false;
 		}
 	}
-	public void setMyDbUtils(DbUtils dbUtils){
-			this.myDbUtils = dbUtils;
+	public void setMyOffreDbUtils(DbUtils dbUtils){
+			this.myOffreDbUtils = dbUtils;
 	}
-	public void setAcht(UtilisateurDao produitDAO){
-			this.acht = produitDAO;
+	public void setUtilisateurDaoOffreDao(UtilisateurDao produitDAO){
+			this.utilisateurDaoOffreDao = produitDAO;
 	}
-	public void setProd(ProduitDao produitDAO){
-			this.prod = produitDAO;
+	public void setProduitDaoOffreDao(ProduitDao produitDAO){
+			this.produitDaoOffreDao = produitDAO;
 	}
 
 }

@@ -22,9 +22,9 @@ import java.util.ArrayList;
 
 
 public class OffreServiceImpl implements OffreService {
-	private OffreDao myDao;
-	private UtilisateurDao utDao;
-	private ProduitDao prodDao;
+	private OffreDao offreDaoOffreService;
+	private UtilisateurDao utilisateurDaoOffreService;
+	private ProduitDao produitDaoOffreService;
 	
 	public OffreServiceImpl() throws SQLException, Exception {
 		// TODO Auto-generated constructor stub
@@ -56,13 +56,13 @@ public class OffreServiceImpl implements OffreService {
 			}
 		//	L'acheteur est bien dans la base de données
 			 
-			if(acheteur.getId() == 0 || utDao.findById(acheteur.getId()) == null){
+			if(acheteur.getId() == 0 || utilisateurDaoOffreService.findById(acheteur.getId()) == null){
 				busrulesOK = false;
 				System.out.println("Acheteur inconnu");
 			}
 		//	Le produit est bien dans la base de données
 			
-			if(produit.getId() == 0 || prodDao.findById(produit.getId()) == null){
+			if(produit.getId() == 0 || produitDaoOffreService.findById(produit.getId()) == null){
 				busrulesOK = false;
 				System.out.println("Produit inconnu");
 			}
@@ -73,7 +73,7 @@ public class OffreServiceImpl implements OffreService {
 			Offre myOffre = new Offre(montant,acheteur,produit);
 			
 			//Stockage de myUt dans la base de donnees
-			myDao.create(myOffre);
+			offreDaoOffreService.create(myOffre);
 	     
 	     	return myOffre;
 	     }
@@ -84,26 +84,26 @@ public class OffreServiceImpl implements OffreService {
 	}
 
 	public List<Offre> findAllOffres(){
-		return myDao.findAll();
+		return offreDaoOffreService.findAll();
 	}
 
 	public boolean deleteOffre(int id){
-		return myDao.delete(new Offre(id));
+		return offreDaoOffreService.delete(new Offre(id));
 	}
 
 	public Offre findOffreById(int id){
-		return myDao.findById(id);
+		return offreDaoOffreService.findById(id);
 	}
 
-	public void setMyDao(OffreDao offreDao){
-			this.myDao = offreDao;
+	public void setOffreDaoOffreService(OffreDao offreDAO){
+			this.offreDaoOffreService = offreDAO;
 	}
 
-	public void setUtDao(UtilisateurDao utilisateurDao){
-			this.utDao = utilisateurDao;
+	public void setUtilisateurDaoOffreService(UtilisateurDao utilisateurDAO){
+			this.utilisateurDaoOffreService = utilisateurDAO;
 	}
-	public void setProdDao(ProduitDao produitDao){
-			this.prodDao = produitDao;
+	public void setProduitDaoOffreService(ProduitDao produitDAO){
+			this.produitDaoOffreService = produitDAO;
 	}
 
 }

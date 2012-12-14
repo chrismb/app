@@ -14,7 +14,7 @@ import fr.adhoc.leboncoin.service.UtilisateurService;
 
 
 public class UtilisateurServiceImpl implements UtilisateurService {
-	private UtilisateurDao myDao;
+	private UtilisateurDao utilisateurDaoUtilisateurService;
 	
 	
 	public UtilisateurServiceImpl() throws SQLException, Exception {
@@ -26,7 +26,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		
 		//Verification de l'unicite du mail
 		
-		if (myDao.findByMail(mail) != null){
+		if (utilisateurDaoUtilisateurService.findByMail(mail) != null){
 			System.out.println("Mail deja utilise ! ");
 			return null;
 		}else{
@@ -34,9 +34,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 			Utilisateur myUt = new Utilisateur(nom,mail);
 			
 			//Stockage de myUt dans la base de donnees
-			myDao.create(myUt);
+			utilisateurDaoUtilisateurService.create(myUt);
 			//On le retire de la base de donnees pour avoi rsonID mis a jour.
-			myUt = myDao.findByMail(myUt.getMail());
+			myUt = utilisateurDaoUtilisateurService.findByMail(myUt.getMail());
 	     
 	     return myUt;
 	        
@@ -44,25 +44,25 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	public List<Utilisateur> findAllUtilisateurs(){
-		return myDao.findAll();
+		return utilisateurDaoUtilisateurService.findAll();
 	}
 
 	public List<Utilisateur> findUtilisateurByName(String nom){
-		return myDao.findByName(nom);
+		return utilisateurDaoUtilisateurService.findByName(nom);
 	}
 	public Utilisateur findUtilisateurById(int id){
 
-		return myDao.findById(id);
+		return utilisateurDaoUtilisateurService.findById(id);
 	}
 	public Utilisateur findUtilisateurByNameAndMail(String nom, String mail){
-		return myDao.findByNameAndMail(nom,mail);
+		return utilisateurDaoUtilisateurService.findByNameAndMail(nom,mail);
 	}
 	public boolean deleteUtilisateur(int id){
-		return myDao.delete(new Utilisateur(id));
+		return utilisateurDaoUtilisateurService.delete(new Utilisateur(id));
 	}
 
-	public void setMyDao(UtilisateurDao utilisateurDao){
-			this.myDao = utilisateurDao;
+	public void setUtilisateurDaoUtilisateurService(UtilisateurDao utilisateurDAO){
+			this.utilisateurDaoUtilisateurService = utilisateurDAO;
 	}
 
 }

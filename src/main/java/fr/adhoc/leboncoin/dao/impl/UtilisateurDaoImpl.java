@@ -13,19 +13,13 @@ import fr.adhoc.leboncoin.dao.UtilisateurDao;
 
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
-	private DbUtils myDbUtils;
-	
-	
-	public UtilisateurDaoImpl() throws SQLException, Exception {
-		 
-		// TODO Auto-generated constructor stub
-	}
+	private DbUtils myUtilisateurDbUtils;
 
 	@Override
 	public Utilisateur create(Utilisateur utilisateur){
         try{		
 		//Stockage dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myUtilisateurDbUtils.getStatement();
 
 
         String str = "INSERT INTO Utilisateur (NOM,MAIL,NOTE) VALUES ('" + 
@@ -57,7 +51,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public Utilisateur findById(int U_ID) {
 	    try {	
 			//Recherche dans la basede donnees
-	        Statement stmt = myDbUtils.getStatement();
+	        Statement stmt = myUtilisateurDbUtils.getStatement();
 	        
 	        ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE U_ID="+ U_ID );
 	        
@@ -88,7 +82,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public List<Utilisateur> findAll(){
 		List<Utilisateur> liste = new ArrayList<Utilisateur>();
 		try{
-			Statement stmt = myDbUtils.getStatement();
+			Statement stmt = myUtilisateurDbUtils.getStatement();
 			ResultSet rslt = stmt.executeQuery("SELECT * FROM UTILISATEUR");
 			while(rslt.next()){
 				Utilisateur ut = new Utilisateur();
@@ -107,7 +101,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		public Utilisateur findByMail(String mail) {
 	        try {	
 		//Recherche dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myUtilisateurDbUtils.getStatement();
         
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE MAIL='"+ mail +"'");
         
@@ -141,7 +135,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	    List<Utilisateur> liste = new ArrayList<Utilisateur>();
 	     try {	
 		//Recherche dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myUtilisateurDbUtils.getStatement();
         
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='"+ nom +"'");
         
@@ -165,7 +159,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public Utilisateur findByNameAndMail(String nom,String mail){
 	     try {	
 		//Recherche dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myUtilisateurDbUtils.getStatement();
         
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Utilisateur WHERE NOM='"+ nom +"' AND MAIL='" + mail +"'");
         
@@ -198,7 +192,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public boolean delete(Utilisateur utilisateur){
 		try{
 			String str = "DELETE FROM Utilisateur WHERE U_ID=" + utilisateur.getId();
-			Statement stmt = myDbUtils.getStatement();
+			Statement stmt = myUtilisateurDbUtils.getStatement();
        		stmt.execute(str);
 			stmt.close();
         	return true;
@@ -209,8 +203,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		}
 	}
 
-	public void setMyDbUtils(DbUtils dbUtils){
-			this.myDbUtils = dbUtils;
+	public void setMyUtilisateurDbUtils(DbUtils dbUtils){
+			this.myUtilisateurDbUtils = dbUtils;
 	}
 
 }

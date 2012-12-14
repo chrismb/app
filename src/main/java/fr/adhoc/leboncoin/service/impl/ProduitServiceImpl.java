@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 
 public class ProduitServiceImpl implements ProduitService {
-	private ProduitDao myDao;
-	private UtilisateurDao myUtDao;
+	private ProduitDao produitDaoProduitService;
+	private UtilisateurDao utilisateurDaoProduitService;
 	
 	public ProduitServiceImpl() throws SQLException, Exception {
 		// TODO Auto-generated constructor stub
@@ -33,7 +33,7 @@ public class ProduitServiceImpl implements ProduitService {
 			Produit myPro = new Produit(nom,prixDepart,description, vendeur);
 			
 			//Stockage de myUt dans la base de donnees
-			myDao.create(myPro);
+			produitDaoProduitService.create(myPro);
 	     
 	     return myPro;
 	        
@@ -42,26 +42,26 @@ public class ProduitServiceImpl implements ProduitService {
 		
 	}
 	public List<Produit> findProduitByName(String nom){
-		return myDao.findByName(nom);
+		return produitDaoProduitService.findByName(nom);
 	}
 	public List<Produit> findAllProduits(){
-		return myDao.findAll();
+		return produitDaoProduitService.findAll();
 	}
 		public boolean deleteProduit(int id){
 		Produit myProd = new Produit("",0,"",new Utilisateur());
 		myProd.setId(id);
-		return myDao.delete(myProd);
+		return produitDaoProduitService.delete(myProd);
 	}
 	public List<Produit> findProduitsByUtilisateur(int idutilisateur) {
 		
-		return myDao.findByUtilisateur( myUtDao.findById(idutilisateur) );
+		return produitDaoProduitService.findByUtilisateur( utilisateurDaoProduitService.findById(idutilisateur) );
 	}
 
-	public void setMyDao(ProduitDao produitDAO){
-			this.myDao = produitDAO;
+	public void setProduitDaoProduitService(ProduitDao produitDAO){
+			this.produitDaoProduitService = produitDAO;
 	}
-	public void setMyUtDao(UtilisateurDao utilisateurDAO){
-			this.myUtDao = utilisateurDAO;
+	public void setUtilisateurDaoProduitService(UtilisateurDao utilisateurDAO){
+			this.utilisateurDaoProduitService = utilisateurDAO;
 	}
 
 }

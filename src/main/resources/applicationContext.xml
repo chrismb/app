@@ -6,35 +6,35 @@
 	<bean id="dbUtils" class="fr.adhoc.leboncoin.utils.DbUtils"/>
 
 	<bean id="utilisateurDAO" class="fr.adhoc.leboncoin.dao.impl.UtilisateurDaoImpl">
-    	<property name="myDbUtils" ref="dbUtils" />
+    	<property name="myUtilisateurDbUtils" ref="dbUtils" />
 	</bean>
 
 	<bean id="produitDAO" class="fr.adhoc.leboncoin.dao.impl.ProduitDaoImpl">
-    	<property name="myDbUtils" ref="dbUtils" />
-    	<property name="myVendeur" ref="utilisateurDAO" />
-    	<property name="myDao" ref="produitDAO" />
+    	<property name="myProduitDbUtils" ref="dbUtils" />
+    	<property name="utilisateurDaoProduitDao" ref="utilisateurDAO" />
+    	<property name="produitDaoProduitDao" ref="produitDAO" />
 	</bean>
 
 	<bean id="offreDAO" class="fr.adhoc.leboncoin.dao.impl.OffreDaoImpl">
-    	<property name="myDbUtils" ref="dbUtils" />
-    	<property name="acht" ref="utilisateurDAO" />
-    	<property name="prod" ref="produitDAO" />
+    	<property name="myOffreDbUtils" ref="dbUtils" />
+    	<property name="utilisateurDaoOffreDao" ref="utilisateurDAO" />
+    	<property name="produitDaoOffreDao" ref="produitDAO" />
 
 	</bean>
 
 	<bean id="offreService" class="fr.adhoc.leboncoin.service.impl.OffreServiceImpl">
-    	<property name="myDao" ref="offreDAO" />
-    	<property name="prodDao" ref="produitDAO" />
-    	<property name="utDao" ref="utilisateurDAO" />
+    	<property name="offreDaoOffreService" ref="offreDAO" />
+    	<property name="produitDaoOffreService" ref="produitDAO" />
+    	<property name="utilisateurDaoOffreService" ref="utilisateurDAO" />
 	</bean>
 
 	<bean id="produitService" class="fr.adhoc.leboncoin.service.impl.ProduitServiceImpl">
-    	<property name="myDao" ref="produitDAO" />
-    	<property name="myUtDao" ref="utilisateurDAO" />
+    	<property name="produitDaoProduitService" ref="produitDAO" />
+    	<property name="utilisateurDaoProduitService" ref="utilisateurDAO" />
 	</bean>
 	
 	<bean id="utilisateurService" class="fr.adhoc.leboncoin.service.impl.UtilisateurServiceImpl">
-    	<property name="myDao" ref="utilisateurDAO" />
+    	<property name="utilisateurDaoUtilisateurService" ref="utilisateurDAO" />
 	</bean>
  
 </beans>

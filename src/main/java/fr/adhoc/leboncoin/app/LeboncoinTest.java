@@ -31,13 +31,15 @@ public class LeboncoinTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/applicationContext.xml");
 
         UtilisateurService myUtService = (UtilisateurService)context.getBean("utilisateurService");
+        ProduitService myPrService = (ProduitService)context.getBean("produitService");
 
         System.out.println("Liste des Utilisateurs");
 
         for(Utilisateur ut: myUtService.findAllUtilisateurs()){
-            
-            System.out.println(ut.getId() + "\t" + ut.getNom());
-        }       
+            List<Produit> listeproduits = myPrService.findProduitsByUtilisateur(ut.getId());
+            System.out.println(ut.getId() + "\t" + ut.getNom() + " : "+ listeproduits);
+
+        }  
     }
 
 }

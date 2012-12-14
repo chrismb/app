@@ -16,21 +16,16 @@ import fr.adhoc.leboncoin.model.Produit;
 
 
 public class ProduitDaoImpl implements ProduitDao {
-	private DbUtils myDbUtils;
-	private UtilisateurDao myVendeur;
-	private ProduitDao myDao;
-	
-	public ProduitDaoImpl() throws SQLException, Exception {
-		 
-		// TODO Auto-generated constructor stub
-	}
+	private DbUtils myProduitDbUtils;
+	private UtilisateurDao utilisateurDaoProduitDao;
+	private ProduitDao produitDaoProduitDao;
 
 	@Override
 	public Produit create(Produit produit){
 
         try{		
 		//Stockage dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myProduitDbUtils.getStatement();
 
 
         String str = "INSERT INTO Produit (NOM,PRIXDEPART,DESCRIPTION,V_ID) VALUES ('" + 
@@ -61,7 +56,7 @@ public class ProduitDaoImpl implements ProduitDao {
 	public Produit findById(int P_ID) {
 	        try {	
 		//Recherche dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myProduitDbUtils.getStatement();
         
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE P_ID="+ P_ID );
 
@@ -71,7 +66,7 @@ public class ProduitDaoImpl implements ProduitDao {
 				myProduit.setNom(rslt.getString("NOM"));
 				myProduit.setPrixDepart(rslt.getDouble("PRIXDEPART"));
 				myProduit.setDescription(rslt.getString("DESCRIPTION"));
-				myProduit.setVendeur( myVendeur.findById( rslt.getInt("V_ID") ) );
+				myProduit.setVendeur( utilisateurDaoProduitDao.findById( rslt.getInt("V_ID") ) );
 				
 			}
 			rslt.close();
@@ -93,7 +88,7 @@ public class ProduitDaoImpl implements ProduitDao {
 	    List<Produit> liste = new ArrayList<Produit>();
 	     try {	
 		//Recherche dans la basede donnees
-        Statement stmt = myDbUtils.getStatement();
+        Statement stmt = myProduitDbUtils.getStatement();
         
         ResultSet rslt = stmt.executeQuery("SELECT * FROM Produit WHERE NOM='"+ nom +"'");
         
@@ -105,7 +100,7 @@ public class ProduitDaoImpl implements ProduitDao {
 				prod.setNom(rslt.getString("NOM"));
 				prod.setPrixDepart(rslt.getDouble("PRIXDEPART"));
 				prod.setDescription(rslt.getString("DESCRIPTION"));
-				prod.setVendeur( myVendeur.findById( rslt.getInt("V_ID") ));
+				prod.setVendeur( utilisateurDaoProduitDao.findById( rslt.getInt("V_ID") ));
 				liste.add(prod);
 			}
 			rslt.close();
@@ -125,7 +120,7 @@ public class ProduitDaoImpl implements ProduitDao {
 	public List<Produit> findAll(){
 		List<Produit> liste = new ArrayList<Produit>();
 		try{
-			Statement stmt = myDbUtils.getStatement();
+			Statement stmt = myProduitDbUtils.getStatement();
 			ResultSet rslt = stmt.executeQuery("SELECT * FROM PRODUIT");
 			while(rslt.next()){
 				Produit prod = new Produit();
@@ -133,7 +128,7 @@ public class ProduitDaoImpl implements ProduitDao {
 				prod.setNom(rslt.getString("NOM"));
 				prod.setPrixDepart(rslt.getDouble("PRIXDEPART"));
 				prod.setDescription(rslt.getString("DESCRIPTION"));
-				prod.setVendeur( myVendeur.findById( rslt.getInt("V_ID") ));
+				prod.setVendeur( utilisateurDaoProduitDao.findById( rslt.getInt("V_ID") ));
 				liste.add(prod);
 			}
 			rslt.close();
@@ -151,7 +146,7 @@ public class ProduitDaoImpl implements ProduitDao {
 	public boolean delete(Produit produit){
 		try{
 			String str = "DELETE FROM Produit WHERE P_ID=" + produit.getId();
-			Statement stmt = myDbUtils.getStatement();
+			Statement stmt = myProduitDbUtils.getStatement();
        		stmt.execute(str);
        		stmt.close();
         	return true;
@@ -164,7 +159,7 @@ public class ProduitDaoImpl implements ProduitDao {
 	public List<Produit> findByUtilisateur(Utilisateur utilisateur){
 		List<Produit> listeproduits = new ArrayList<Produit>();
 	
-   		for(Produit prod : myDao.findAll() ){
+   		for(Produit prod : produitDaoProduitDao.findAll() ){
 
 	        if( prod.getVendeur().getId() == utilisateur.getId() ){
 	            listeproduits.add(prod);
@@ -172,14 +167,14 @@ public class ProduitDaoImpl implements ProduitDao {
     	}
     	return listeproduits;
 	}
-	public void setMyDbUtils(DbUtils dbUtils){
-			this.myDbUtils = dbUtils;
+	public void setMyProduitDbUtils(DbUtils dbUtils){
+			this.myProduitDbUtils = dbUtils;
 	}
-	public void setMyVendeur(UtilisateurDao utilisateurDAO){
-			this.myVendeur = utilisateurDAO;
+	public void setUtilisateurDaoProduitDao(UtilisateurDao utilisateurDAO){
+			this.utilisateurDaoProduitDao = utilisateurDAO;
 	}
-	public void setMyDao(ProduitDao produitDAO){
-			this.myDao= produitDAO;
+	public void setProduitDaoProduitDao(ProduitDao produitDAO){
+			this.produitDaoProduitDao= produitDAO;
 	}
 
 
