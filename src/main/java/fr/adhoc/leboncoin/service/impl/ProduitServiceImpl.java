@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class ProduitServiceImpl implements ProduitService {
 	private ProduitDao myDao;
+	private UtilisateurDao myUtDao;
 	
 	public ProduitServiceImpl() throws SQLException, Exception {
 		// TODO Auto-generated constructor stub
@@ -52,19 +53,15 @@ public class ProduitServiceImpl implements ProduitService {
 		return myDao.delete(myProd);
 	}
 	public List<Produit> findProduitsByUtilisateur(int idutilisateur) {
-		UtilisateurDao myUtDao = null;
-		try{
-			myUtDao = new UtilisateurDaoImpl();
-		}
-		catch (Exception e) {
-        	System.out.println(e);
-        	return null;
-        }
+		
 		return myDao.findByUtilisateur( myUtDao.findById(idutilisateur) );
 	}
 
-	public void setMyDao(ProduitDao produitDao){
-			this.myDao = produitDao;
+	public void setMyDao(ProduitDao produitDAO){
+			this.myDao = produitDAO;
+	}
+	public void setMyUtDao(UtilisateurDao utilisateurDAO){
+			this.myUtDao = utilisateurDAO;
 	}
 
 }

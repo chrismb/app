@@ -19,6 +19,8 @@ import fr.adhoc.leboncoin.dao.ProduitDao;
 
 public class OffreDaoImpl implements OffreDao {
 	private DbUtils myDbUtils;
+	private UtilisateurDao acht;
+	private ProduitDao prod;
 	
 	
 	public OffreDaoImpl() throws SQLException, Exception {
@@ -71,8 +73,7 @@ public class OffreDaoImpl implements OffreDao {
         
         //Instantiation du acheteur
 
-        UtilisateurDao acht = new UtilisateurDaoImpl();
-		ProduitDao prod = new ProduitDaoImpl();
+
         Offre myOffre = new Offre();
 			if  (rslt.next()){
 				myOffre.setId(rslt.getInt("O_ID"));
@@ -108,8 +109,6 @@ public class OffreDaoImpl implements OffreDao {
 			ResultSet rslt = stmt.executeQuery("SELECT * FROM OFFRE");
 			while(rslt.next()){
 				Offre of = new Offre();
-				UtilisateurDao acht = new UtilisateurDaoImpl();
-				ProduitDao prod = new ProduitDaoImpl();
 				of.setId(rslt.getInt("O_ID"));
 				of.setMontant(rslt.getDouble("MONTANT"));
 				of.setDate(rslt.getDate("DATE"));
@@ -145,6 +144,12 @@ public class OffreDaoImpl implements OffreDao {
 	}
 	public void setMyDbUtils(DbUtils dbUtils){
 			this.myDbUtils = dbUtils;
+	}
+	public void setAcht(UtilisateurDao produitDAO){
+			this.acht = produitDAO;
+	}
+	public void setProd(ProduitDao produitDAO){
+			this.prod = produitDAO;
 	}
 
 }
