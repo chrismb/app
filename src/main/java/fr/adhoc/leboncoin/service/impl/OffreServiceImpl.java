@@ -25,10 +25,6 @@ public class OffreServiceImpl implements OffreService {
 	private OffreDao offreDaoOffreService;
 	private UtilisateurDao utilisateurDaoOffreService;
 	private ProduitDao produitDaoOffreService;
-	
-	public OffreServiceImpl() throws SQLException, Exception {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public Offre createOffre(Double montant, Utilisateur acheteur,Produit produit){

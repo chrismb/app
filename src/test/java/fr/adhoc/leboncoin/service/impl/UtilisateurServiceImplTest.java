@@ -22,6 +22,7 @@ import fr.adhoc.leboncoin.dao.UtilisateurDao;
 
 
 public class UtilisateurServiceImplTest {
+/*
 	private static UtilisateurService myService;
 	private static UtilisateurDao myDao;
 	private static int lastID;
@@ -114,5 +115,6 @@ public class UtilisateurServiceImplTest {
 
 		 
 	}
+	*/
 
 }

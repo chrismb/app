@@ -30,6 +30,8 @@ import fr.adhoc.leboncoin.dao.ProduitDao;
 
 
 public class OffreServiceImplTest {
+/*
+
 	private static DbUtils myDbUtils;
 	private static UtilisateurDao myUtDao;
 	private static OffreDao myOfDao;
@@ -120,7 +122,7 @@ public class OffreServiceImplTest {
 
 	}
 
-/*
+
 	@Test
 	public void findOffreByIdTest() throws SQLException, Exception{
 		myService.createUtilisateur("test8","test8@test.ts");	
@@ -129,7 +131,7 @@ public class OffreServiceImplTest {
 		assertEquals(myService.findUtilisateurById(IDtest).getMail(), myDao.findById(IDtest).getMail());
 
 	}
-*/
+
 	@AfterClass public static void runAfterClass() throws SQLException, Exception {
 		// run for one time after all test cases
 		for(Offre of : listeOffres) {
@@ -146,5 +148,6 @@ public class OffreServiceImplTest {
 
 		 
 	}
+*/
 
 }

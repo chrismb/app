@@ -18,6 +18,7 @@ import fr.adhoc.leboncoin.model.Offre;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext; 
 
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 public class LeboncoinTest {
 
@@ -28,7 +29,8 @@ public class LeboncoinTest {
 
     public static void main(String[] args) throws Exception {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/applicationContext.xml");
+        //ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/applicationContext.xml");
+        ApplicationContext context = new FileSystemXmlApplicationContext("/src/main/resources/applicationContext.xml"); 
 
         UtilisateurService myUtService = (UtilisateurService)context.getBean("utilisateurService");
         ProduitService myPrService = (ProduitService)context.getBean("produitService");

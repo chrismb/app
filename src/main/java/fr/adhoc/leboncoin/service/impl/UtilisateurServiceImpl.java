@@ -15,11 +15,6 @@ import fr.adhoc.leboncoin.service.UtilisateurService;
 
 public class UtilisateurServiceImpl implements UtilisateurService {
 	private UtilisateurDao utilisateurDaoUtilisateurService;
-	
-	
-	public UtilisateurServiceImpl() throws SQLException, Exception {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public Utilisateur createUtilisateur(String nom, String mail){

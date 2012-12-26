@@ -21,10 +21,7 @@ import java.util.ArrayList;
 public class ProduitServiceImpl implements ProduitService {
 	private ProduitDao produitDaoProduitService;
 	private UtilisateurDao utilisateurDaoProduitService;
-	
-	public ProduitServiceImpl() throws SQLException, Exception {
-		// TODO Auto-generated constructor stub
-	}
+
 
 	@Override
 	public Produit createProduit(String nom, double prixDepart, String description, Utilisateur vendeur){
